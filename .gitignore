@@ -1,0 +1,32 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Lambda build artifacts
+.build/
+*.zip
+
+# Secrets and local settings (.env holds TF_VAR_notification_email)
+.env
+.claude/settings.local.json
+
+# Generated email preview
+preview.html
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
