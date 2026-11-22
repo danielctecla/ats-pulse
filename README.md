@@ -45,7 +45,7 @@ src/ats_pulse/              Lambda code (stdlib + boto3, zipped as is)
   emails.py                 digest (HTML + plain text) and alert content
   notify.py                 sends them through SES
   handler.py                Lambda entry point
-tests/                      pytest + moto; fixtures/ holds a real Ashby response, trimmed
+tests/                      pytest + moto; fixtures/ holds real Ashby and Greenhouse responses, trimmed
 scripts/run_local.py        backs make run-local
 iac/env/                    Terraform: Lambda, DynamoDB, Scheduler, SES, alarm
 iac/env/tests/              terraform test (mocked providers, no AWS calls)
@@ -80,6 +80,7 @@ Behavior to know about:
 - The first run against an empty table reports every current matching opening. Later runs only report new ones.
 - When Mexico is only a secondary location, the job's location reads `Ciudad de México (also Palo Alto)`.
 - The stored link is the job's posting page, which has the apply button.
+- Greenhouse boards have no standard department in their job list, so the department is the board's `Career Site Category` field. Boards that don't use it are matched on the title only.
 
 ### Emails
 
@@ -99,11 +100,13 @@ Add one entry to `sources.toml`:
 ```toml
 [[sources]]
 company = "Nubank"   # display name, also the health key (must be unique)
-ats     = "ashby"    # supported: ashby
+ats     = "ashby"    # supported: ashby, greenhouse
 slug    = "nubank"   # the company's board name in that ATS
 ```
 
-To support another ATS (Greenhouse, Lever), add a module in `adapters/` with a `fetch_jobs(source)` function and register it in `adapters/__init__.py`.
+The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`.
+
+To support another ATS (e.g. Lever), add a module in `adapters/` with a `fetch_jobs(source)` function and register it in `adapters/__init__.py`.
 
 ## Data model
 

@@ -1,0 +1,529 @@
+{
+  "jobs": [
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8900188002?gh_jid=8900188002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6565139002,
+      "location": {
+        "name": "Mexico City, Mexico"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Software Engineering",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8900188002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111272",
+      "title": "Android Engineer, Luxury",
+      "company_name": "Lyft",
+      "first_published": "2026-10-20T17:03:48-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8952091002?gh_jid=8952091002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6587822002,
+      "location": {
+        "name": "Mexico City, Mexico"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Software Engineering",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8952091002,
+      "updated_at": "2026-11-19T17:17:26-05:00",
+      "requisition_id": "111343",
+      "title": "Engineering Manager, Business Travel",
+      "company_name": "Lyft",
+      "first_published": "2026-11-19T17:17:26-05:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8938561002?gh_jid=8938561002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6581725002,
+      "location": {
+        "name": "Mexico City, Mexico"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Customer Experience",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8938561002,
+      "updated_at": "2026-11-11T17:36:05-05:00",
+      "requisition_id": "111334",
+      "title": "Social Support Associate, Customer Care Operations",
+      "company_name": "Lyft",
+      "first_published": "2026-11-11T17:36:04-05:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8767715002?gh_jid=8767715002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "employment": "employment_optional",
+      "internal_job_id": 6507749002,
+      "location": {
+        "name": "Mexico City, Mexico"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "University",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8767715002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111131",
+      "title": "Software Engineer Intern, Backend (Summer 2027 - Mexico)",
+      "company_name": "Lyft",
+      "first_published": "2026-09-11T12:49:54-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8797819002?gh_jid=8797819002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "employment": "employment_optional",
+      "internal_job_id": 6520088002,
+      "location": {
+        "name": "Mexico City, Mexico"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "University",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8797819002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111174",
+      "title": "Software Engineer Intern, Frontend (Summer 2027)",
+      "company_name": "Lyft",
+      "first_published": "2026-09-11T12:50:07-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8831430002?gh_jid=8831430002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6535229002,
+      "location": {
+        "name": "Toronto, Canada"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Software Engineering",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8831430002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111208",
+      "title": "Senior Software Engineer, Rider",
+      "company_name": "Lyft",
+      "first_published": "2026-09-23T17:00:59-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8772592002?gh_jid=8772592002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_required",
+      "employment": "employment_required",
+      "internal_job_id": 6510024002,
+      "location": {
+        "name": "Seattle, WA"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Data Science",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8772592002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111138",
+      "title": "Data Scientist ",
+      "company_name": "Lyft",
+      "first_published": "2026-09-02T03:14:00-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8940409002?gh_jid=8940409002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6582492002,
+      "location": {
+        "name": "Ukraine Anywhere"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Software Engineering",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8940409002,
+      "updated_at": "2026-11-13T04:59:14-05:00",
+      "requisition_id": "111335",
+      "title": "Data Engineer, Marketplace",
+      "company_name": "Lyft",
+      "first_published": "2026-11-13T04:17:01-05:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8767710002?gh_jid=8767710002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "employment": "employment_optional",
+      "internal_job_id": 6507747002,
+      "location": {
+        "name": "Toronto, Canada"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "University",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8767710002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111130",
+      "title": "Software Engineer Intern, Backend (Summer 2027 - Toronto)",
+      "company_name": "Lyft",
+      "first_published": "2026-09-11T12:48:00-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8503985002?gh_jid=8503985002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6396743002,
+      "location": {
+        "name": "San Francisco, CA"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Data Analytics & Business Intelligence",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8503985002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "110719",
+      "title": "Analytics Lead, Market Insights",
+      "company_name": "Lyft",
+      "first_published": "2026-04-14T12:53:57-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8927798002?gh_jid=8927798002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6577413002,
+      "location": {
+        "name": "New York, NY"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Accounting & Finance",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8927798002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111323",
+      "title": "Accountant, Lease & Fleet",
+      "company_name": "Lyft",
+      "first_published": "2026-11-03T17:39:10-05:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8943182002?gh_jid=8943182002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6543749002,
+      "location": {
+        "name": "Houston, TX"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Legal",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8943182002,
+      "updated_at": "2026-11-13T15:16:04-05:00",
+      "requisition_id": "111220",
+      "title": " Counsel, Patents & IP",
+      "company_name": "Lyft",
+      "first_published": "2026-11-13T15:16:04-05:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8908003002?gh_jid=8908003002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6568657002,
+      "location": {
+        "name": "Toronto, Canada"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Design",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8908003002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111287",
+      "title": "Senior Product Designer, Mapping",
+      "company_name": "Lyft",
+      "first_published": "2026-10-23T17:24:26-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8925465002?gh_jid=8925465002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6429534002,
+      "location": {
+        "name": "Nashville, TN"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Operations",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8925465002,
+      "updated_at": "2026-11-16T12:56:10-05:00",
+      "requisition_id": "110881",
+      "title": "Fleet Operations Associate",
+      "company_name": "Lyft",
+      "first_published": "2026-10-30T12:54:11-04:00",
+      "language": "en",
+      "application_deadline": null
+    },
+    {
+      "absolute_url": "https://app.careerpuck.com/job-board/lyft/job/8921966002?gh_jid=8921966002",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "education": "education_optional",
+      "employment": "employment_required",
+      "internal_job_id": 6526474002,
+      "location": {
+        "name": "Toronto, Canada"
+      },
+      "metadata": [
+        {
+          "id": 4345907002,
+          "name": "Career Site Category",
+          "value": "Product",
+          "value_type": "single_select"
+        }
+      ],
+      "id": 8921966002,
+      "updated_at": "2026-11-10T10:52:40-05:00",
+      "requisition_id": "111186",
+      "title": "Senior Product Manager, Driver Experience",
+      "company_name": "Lyft",
+      "first_published": "2026-10-28T10:48:12-04:00",
+      "language": "en",
+      "application_deadline": null
+    }
+  ],
+  "meta": {
+    "total": 15
+  }
+}

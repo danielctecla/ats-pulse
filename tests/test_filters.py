@@ -1,6 +1,6 @@
 import pytest
 
-from ats_pulse.adapters import ashby
+from ats_pulse.adapters import ashby, greenhouse
 from ats_pulse.filters import is_engineering, is_mexico, mexico_location
 
 from conftest import make_job
@@ -86,4 +86,19 @@ def test_real_response_selects_expected_jobs(ashby_payload, nubank):
         "Engineering Manager - Mexico ( Hybrid)",
         "Staff Software Engineer, Product Workflow Reinvention",
         "AI Engineer, Design",
+    }
+
+
+def test_real_greenhouse_response_selects_expected_jobs(greenhouse_payload, lyft):
+    """Same rule on the Lyft fixture: 5 jobs in Mexico, all but customer support are engineering."""
+    jobs, _ = greenhouse.parse(greenhouse_payload, lyft)
+    mexico = {j.title for j in jobs if is_mexico(j)}
+    selected = {j.title for j in jobs if is_mexico(j) and is_engineering(j)}
+
+    assert mexico - selected == {"Social Support Associate, Customer Care Operations"}
+    assert selected == {
+        "Android Engineer, Luxury",
+        "Engineering Manager, Business Travel",  # only the category says engineering
+        "Software Engineer Intern, Backend (Summer 2027 - Mexico)",
+        "Software Engineer Intern, Frontend (Summer 2027)",
     }
