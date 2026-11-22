@@ -88,8 +88,8 @@ Both are sent from and to the notification address, with the sender name `ats-pu
 
 | Email | Subject | Format |
 |-------|---------|--------|
-| Digest | `7 new engineering jobs in Mexico: Nubank` | HTML plus a plain-text part. Grouped by company (A–Z), newest posting first: title (linked), location, department, posting date. |
-| Alert | `Job board failing: Nubank` | Plain text: each failing source, failed runs in a row, last error. |
+| Digest | `7 new engineering jobs in Mexico: Acme, Globex` | HTML plus a plain-text part. Grouped by company (A–Z), newest posting first: title (linked), location, department, posting date. |
+| Alert | `Job board failing: Acme` | Plain text: each failing source, failed runs in a row, last error. |
 
 `make run-local` prints both as plain text and writes the digest's HTML to `preview.html` (gitignored) so you can open it in a browser.
 
@@ -99,9 +99,9 @@ Add one entry to `sources.toml`:
 
 ```toml
 [[sources]]
-company = "Nubank"   # display name, also the health key (must be unique)
-ats     = "ashby"    # supported: ashby, greenhouse
-slug    = "nubank"   # the company's board name in that ATS
+company = "Acme"         # display name, also the health key (must be unique)
+ats     = "greenhouse"   # supported: ashby, greenhouse
+slug    = "acme"         # the company's board name in that ATS
 ```
 
 The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`.
@@ -131,7 +131,7 @@ The crash alarm goes through SNS rather than SES, so it still arrives when the L
 Each run logs one JSON line per source, plus a run summary:
 
 ```json
-{"message": "source summary", "source": "ashby:nubank", "company": "Nubank", "fetched": 111, "mexico": 21, "engineering": 7, "new": 7, "errors": 0}
+{"message": "source summary", "source": "greenhouse:acme", "company": "Acme", "fetched": 148, "mexico": 5, "engineering": 4, "new": 4, "errors": 0}
 ```
 
 `errors` counts malformed postings skipped, plus 1 if the source failed; failed sources also carry an `error` field.
