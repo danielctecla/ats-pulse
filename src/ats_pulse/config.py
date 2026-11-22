@@ -41,4 +41,9 @@ def load_sources(path: Path = SOURCES_FILE, supported_ats=None) -> list[Source]:
     keys = [s.key for s in sources]
     if len(keys) != len(set(keys)):
         raise ValueError("sources.toml has duplicate ats/slug entries")
+    # Each company has one health record (failure counter, alert flag), so two
+    # boards of the same company need distinct names, e.g. "Acme" and "Acme MX".
+    companies = [s.company for s in sources]
+    if len(companies) != len(set(companies)):
+        raise ValueError("sources.toml has duplicate company names")
     return sources
