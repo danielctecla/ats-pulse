@@ -71,6 +71,17 @@ def ashby_payload():
     return json.loads((FIXTURES / "ashby_nubank.json").read_text(encoding="utf-8"))
 
 
+@pytest.fixture
+def lyft():
+    return Source(company="Lyft", ats="greenhouse", slug="lyft")
+
+
+@pytest.fixture
+def greenhouse_payload():
+    """Real Lyft response (2026-11-21), trimmed to 15 jobs (all 5 in Mexico)."""
+    return json.loads((FIXTURES / "greenhouse_lyft.json").read_text(encoding="utf-8"))
+
+
 def make_job(**overrides) -> Job:
     fields = {
         "job_id": "job-1",

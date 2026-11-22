@@ -45,7 +45,7 @@ src/ats_pulse/              Lambda code (stdlib + boto3, zipped as is)
   emails.py                 digest (HTML + plain text) and alert content
   notify.py                 sends them through SES
   handler.py                Lambda entry point
-tests/                      pytest + moto; fixtures/ holds a real Ashby response, trimmed
+tests/                      pytest + moto; fixtures/ holds real Ashby and Greenhouse responses, trimmed
 scripts/run_local.py        backs make run-local
 iac/env/                    Terraform: Lambda, DynamoDB, Scheduler, SES, alarm
 iac/env/tests/              terraform test (mocked providers, no AWS calls)
@@ -80,6 +80,7 @@ Behavior to know about:
 - The first run against an empty table reports every current matching opening. Later runs only report new ones.
 - When Mexico is only a secondary location, the job's location reads `Ciudad de México (also Palo Alto)`.
 - The stored link is the job's posting page, which has the apply button.
+- Greenhouse boards have no standard department in their job list, so the department is the board's `Career Site Category` field. Boards that don't use it are matched on the title only.
 
 ### Emails
 
@@ -87,8 +88,8 @@ Both are sent from and to the notification address, with the sender name `ats-pu
 
 | Email | Subject | Format |
 |-------|---------|--------|
-| Digest | `7 new engineering jobs in Mexico: Nubank` | HTML plus a plain-text part. Grouped by company (A–Z), newest posting first: title (linked), location, department, posting date. |
-| Alert | `Job board failing: Nubank` | Plain text: each failing source, failed runs in a row, last error. |
+| Digest | `7 new engineering jobs in Mexico: Acme, Globex` | HTML plus a plain-text part. Grouped by company (A–Z), newest posting first: title (linked), location, department, posting date. |
+| Alert | `Job board failing: Acme` | Plain text: each failing source, failed runs in a row, last error. |
 
 `make run-local` prints both as plain text and writes the digest's HTML to `preview.html` (gitignored) so you can open it in a browser.
 
@@ -98,12 +99,14 @@ Add one entry to `sources.toml`:
 
 ```toml
 [[sources]]
-company = "Nubank"   # display name, also the health key (must be unique)
-ats     = "ashby"    # supported: ashby
-slug    = "nubank"   # the company's board name in that ATS
+company = "Acme"         # display name, also the health key (must be unique)
+ats     = "greenhouse"   # supported: ashby, greenhouse
+slug    = "acme"         # the company's board name in that ATS
 ```
 
-To support another ATS (Greenhouse, Lever), add a module in `adapters/` with a `fetch_jobs(source)` function and register it in `adapters/__init__.py`.
+The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`.
+
+To support another ATS (e.g. Lever), add a module in `adapters/` with a `fetch_jobs(source)` function and register it in `adapters/__init__.py`.
 
 ## Data model
 
@@ -128,7 +131,7 @@ The crash alarm goes through SNS rather than SES, so it still arrives when the L
 Each run logs one JSON line per source, plus a run summary:
 
 ```json
-{"message": "source summary", "source": "ashby:nubank", "company": "Nubank", "fetched": 111, "mexico": 21, "engineering": 7, "new": 7, "errors": 0}
+{"message": "source summary", "source": "greenhouse:acme", "company": "Acme", "fetched": 148, "mexico": 5, "engineering": 4, "new": 4, "errors": 0}
 ```
 
 `errors` counts malformed postings skipped, plus 1 if the source failed; failed sources also carry an `error` field.

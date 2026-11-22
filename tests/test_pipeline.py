@@ -4,7 +4,7 @@ import logging
 import pytest
 
 from ats_pulse import handler, pipeline
-from ats_pulse.adapters import ADAPTERS, ashby
+from ats_pulse.adapters import ADAPTERS, ashby, greenhouse
 from ats_pulse.config import Source
 from ats_pulse.fetch import SourceError
 
@@ -112,17 +112,18 @@ def test_long_errors_are_cut_in_the_alert(store, notifier):
     assert len(notifier.alerts[0][0].last_error) == 500  # same as what DynamoDB keeps
 
 
-def test_handler_runs_configured_sources(table, ses, monkeypatch, ashby_payload):
-    """End to end through lambda_handler: Ashby call replaced by the fixture, SES by moto."""
+def test_handler_runs_configured_sources(table, ses, monkeypatch, ashby_payload, greenhouse_payload):
+    """End to end through lambda_handler: API calls replaced by the fixtures, SES by moto."""
     monkeypatch.setenv("TABLE_NAME", TABLE_NAME)
     monkeypatch.setenv("NOTIFICATION_EMAIL", EMAIL)
     monkeypatch.setitem(ADAPTERS, "ashby", lambda source: ashby.parse(ashby_payload, source))
+    monkeypatch.setitem(ADAPTERS, "greenhouse", lambda source: greenhouse.parse(greenhouse_payload, source))
 
     first = handler.lambda_handler({}, None)
     second = handler.lambda_handler({}, None)
 
-    assert first == {"sources": 1, "failed_sources": 0, "new": 7, "alerts": 0}
+    assert first == {"sources": 2, "failed_sources": 0, "new": 11, "alerts": 0}  # 7 + 4
     assert second["new"] == 0
     assert json.dumps(first)  # JSON-serializable for the Lambda response
 
-    assert [m.subject for m in sent_emails()] == ["7 new engineering jobs in Mexico: Nubank"]
+    assert [m.subject for m in sent_emails()] == ["11 new engineering jobs in Mexico: Lyft, Nubank"]
