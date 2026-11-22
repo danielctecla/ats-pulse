@@ -1,0 +1,852 @@
+{
+  "apiVersion": "1",
+  "jobs": [
+    {
+      "id": "c004572e-3438-4200-a86d-1c3b64acb6ac",
+      "title": "Senior Manager - Insider Threat Defense",
+      "department": "Engineer",
+      "team": "Engineer",
+      "employmentType": "FullTime",
+      "location": "São Paulo",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-18T13:23:23.426+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "São Paulo",
+          "addressCountry": "Brazil",
+          "addressLocality": "São Paulo"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/c004572e-3438-4200-a86d-1c3b64acb6ac",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/c004572e-3438-4200-a86d-1c3b64acb6ac/application"
+    },
+    {
+      "id": "2c76d5fa-683a-4ac7-ae9d-598dd8589e66",
+      "title": "Senior Software Engineer – Mexico City, Mexico (Hybrid)",
+      "department": "Engineer",
+      "team": "Engineer",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-07-19T23:17:05.687+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/2c76d5fa-683a-4ac7-ae9d-598dd8589e66",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/2c76d5fa-683a-4ac7-ae9d-598dd8589e66/application"
+    },
+    {
+      "id": "693fd9ab-4d48-49c5-8cf8-22acd92d6e1b",
+      "title": "Senior Business Analyst ",
+      "department": "Business Analyst",
+      "team": "Business Analyst",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-10-26T12:23:40.449+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/693fd9ab-4d48-49c5-8cf8-22acd92d6e1b",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/693fd9ab-4d48-49c5-8cf8-22acd92d6e1b/application"
+    },
+    {
+      "id": "97d294d0-4462-49a5-b8f9-fc6e68cf32ff",
+      "title": "Senior Legal Counsel, Privacy, AI & Consumer Protection ",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Miami",
+      "secondaryLocations": [],
+      "publishedAt": "2026-07-19T23:49:05.082+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Florida",
+          "addressCountry": "United States",
+          "addressLocality": "Miami"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/97d294d0-4462-49a5-b8f9-fc6e68cf32ff",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/97d294d0-4462-49a5-b8f9-fc6e68cf32ff/application"
+    },
+    {
+      "id": "d91e0c01-91ca-48f5-ac15-48e421b64f21",
+      "title": "Head of Design, AI Private Banker",
+      "department": "Design",
+      "team": "Design",
+      "employmentType": "FullTime",
+      "location": "Palo Alto",
+      "secondaryLocations": [],
+      "publishedAt": "2026-08-21T18:52:23.760+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "California",
+          "addressCountry": "United States",
+          "addressLocality": "Palo Alto"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/d91e0c01-91ca-48f5-ac15-48e421b64f21",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/d91e0c01-91ca-48f5-ac15-48e421b64f21/application"
+    },
+    {
+      "id": "ecd4ec39-1f0a-4f65-b27a-f537c895a233",
+      "title": "Lead Machine Learning Engineer",
+      "department": "Candidate Pool",
+      "team": "Candidate Pool",
+      "employmentType": "FullTime",
+      "location": "São Paulo",
+      "secondaryLocations": [],
+      "publishedAt": "2026-09-15T18:55:54.648+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "São Paulo",
+          "addressCountry": "Brazil",
+          "addressLocality": "São Paulo"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/ecd4ec39-1f0a-4f65-b27a-f537c895a233",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/ecd4ec39-1f0a-4f65-b27a-f537c895a233/application"
+    },
+    {
+      "id": "30994369-f227-4404-a0d2-1f49152f9779",
+      "title": "Regulatory Solutions Analyst (Judicial Orders) - México ",
+      "department": "Operations",
+      "team": "Operations",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-09-22T19:47:15.305+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/30994369-f227-4404-a0d2-1f49152f9779",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/30994369-f227-4404-a0d2-1f49152f9779/application"
+    },
+    {
+      "id": "cce0d503-c999-48fb-948b-ff3851b2f0a9",
+      "title": "Staff Software Engineer, Product Workflow Reinvention",
+      "department": "Engineer",
+      "team": "Engineer",
+      "employmentType": "FullTime",
+      "location": "Palo Alto",
+      "secondaryLocations": [
+        {
+          "location": "Campinas",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "São Paulo",
+              "addressCountry": "Brazil",
+              "addressLocality": "Campinas"
+            }
+          }
+        },
+        {
+          "location": "Ciudad de México",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Mexico City",
+              "addressCountry": "Mexico",
+              "addressLocality": "Mexico City"
+            }
+          }
+        },
+        {
+          "location": "São Paulo",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "São Paulo",
+              "addressCountry": "Brazil",
+              "addressLocality": "São Paulo"
+            }
+          }
+        },
+        {
+          "location": "Belo Horizonte",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Minas Gerais",
+              "addressCountry": "Brazil",
+              "addressLocality": "Belo Horizonte"
+            }
+          }
+        },
+        {
+          "location": "Bogota",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Bogota",
+              "addressCountry": "Colombia",
+              "addressLocality": "Bogota"
+            }
+          }
+        },
+        {
+          "location": "Virginia",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Virginia",
+              "addressCountry": "United States",
+              "addressLocality": "Virginia"
+            }
+          }
+        },
+        {
+          "location": "Miami",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Florida",
+              "addressCountry": "United States",
+              "addressLocality": "Miami"
+            }
+          }
+        },
+        {
+          "location": "Rio de Janeiro",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Rio de Janeiro",
+              "addressCountry": "Brazil",
+              "addressLocality": "Rio de Janeiro"
+            }
+          }
+        }
+      ],
+      "publishedAt": "2026-08-04T13:19:54.429+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "California",
+          "addressCountry": "United States",
+          "addressLocality": "Palo Alto"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/cce0d503-c999-48fb-948b-ff3851b2f0a9",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/cce0d503-c999-48fb-948b-ff3851b2f0a9/application"
+    },
+    {
+      "id": "44354acb-76dc-4979-b88e-567a34fc65fc",
+      "title": "Compliance Expert",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-08-20T20:45:09.973+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/44354acb-76dc-4979-b88e-567a34fc65fc",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/44354acb-76dc-4979-b88e-567a34fc65fc/application"
+    },
+    {
+      "id": "48037d52-16dc-4944-b045-d4e1a97136cc",
+      "title": "Lead Software Engineer - Mexico City",
+      "department": "Engineer",
+      "team": "Engineer",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-19T19:47:03.749+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/48037d52-16dc-4944-b045-d4e1a97136cc",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/48037d52-16dc-4944-b045-d4e1a97136cc/application"
+    },
+    {
+      "id": "a7e55abf-570f-4dc6-8b4b-b542c943e48b",
+      "title": "Senior Staff Product Designer, Global Expansion",
+      "department": "Design",
+      "team": "Design",
+      "employmentType": "FullTime",
+      "location": "Miami",
+      "secondaryLocations": [
+        {
+          "location": "Campinas",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "São Paulo",
+              "addressCountry": "Brazil",
+              "addressLocality": "Campinas"
+            }
+          }
+        },
+        {
+          "location": "Ciudad de México",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Mexico City",
+              "addressCountry": "Mexico",
+              "addressLocality": "Mexico City"
+            }
+          }
+        },
+        {
+          "location": "Toronto",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Ontario",
+              "addressCountry": "Canada",
+              "addressLocality": "Toronto"
+            }
+          }
+        },
+        {
+          "location": "São Paulo",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "São Paulo",
+              "addressCountry": "Brazil",
+              "addressLocality": "São Paulo"
+            }
+          }
+        },
+        {
+          "location": "Belo Horizonte",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Minas Gerais",
+              "addressCountry": "Brazil",
+              "addressLocality": "Belo Horizonte"
+            }
+          }
+        },
+        {
+          "location": "Bogota",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Bogota",
+              "addressCountry": "Colombia",
+              "addressLocality": "Bogota"
+            }
+          }
+        },
+        {
+          "location": "Virginia",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Virginia",
+              "addressCountry": "United States",
+              "addressLocality": "Virginia"
+            }
+          }
+        },
+        {
+          "location": "Rio de Janeiro",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Rio de Janeiro",
+              "addressCountry": "Brazil",
+              "addressLocality": "Rio de Janeiro"
+            }
+          }
+        }
+      ],
+      "publishedAt": "2026-08-30T01:46:27.111+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Florida",
+          "addressCountry": "United States",
+          "addressLocality": "Miami"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/a7e55abf-570f-4dc6-8b4b-b542c943e48b",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/a7e55abf-570f-4dc6-8b4b-b542c943e48b/application"
+    },
+    {
+      "id": "e42ee53e-32a9-4533-b132-dead1189f738",
+      "title": "Product Marketing Manager ",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-20T19:41:35.563+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/e42ee53e-32a9-4533-b132-dead1189f738",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/e42ee53e-32a9-4533-b132-dead1189f738/application"
+    },
+    {
+      "id": "91f1f976-ec71-4b97-acc1-19df45640871",
+      "title": "Lead Infrastructure Engineer — Global Office IT Physical Infra",
+      "department": "Engineer",
+      "team": "Engineer",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-06T00:36:21.783+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/91f1f976-ec71-4b97-acc1-19df45640871",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/91f1f976-ec71-4b97-acc1-19df45640871/application"
+    },
+    {
+      "id": "45289ad4-22de-4b1b-b081-5fbeaa3c5bb6",
+      "title": "Treasury Expert",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-09-16T01:18:27.928+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/45289ad4-22de-4b1b-b081-5fbeaa3c5bb6",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/45289ad4-22de-4b1b-b081-5fbeaa3c5bb6/application"
+    },
+    {
+      "id": "c1dd08ad-8b77-409c-a608-274d2863207c",
+      "title": "Controllership Senior Specialist (FinOps) ",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-09-18T23:01:25.957+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/c1dd08ad-8b77-409c-a608-274d2863207c",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/c1dd08ad-8b77-409c-a608-274d2863207c/application"
+    },
+    {
+      "id": "f299f651-6754-4847-8c97-40b0319f7371",
+      "title": "Senior Researcher ",
+      "department": "Design",
+      "team": "Design",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-10-08T12:38:20.080+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/f299f651-6754-4847-8c97-40b0319f7371",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/f299f651-6754-4847-8c97-40b0319f7371/application"
+    },
+    {
+      "id": "fac13a25-9ede-43a9-b644-ad0e2760cb6d",
+      "title": "AI Engineer, Design",
+      "department": "Design",
+      "team": "Design",
+      "employmentType": "FullTime",
+      "location": "Palo Alto",
+      "secondaryLocations": [
+        {
+          "location": "Ciudad de México",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Mexico City",
+              "addressCountry": "Mexico",
+              "addressLocality": "Mexico City"
+            }
+          }
+        },
+        {
+          "location": "Berlin",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Berlin",
+              "addressCountry": "Germany",
+              "addressLocality": "Berlin"
+            }
+          }
+        },
+        {
+          "location": "Toronto",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Ontario",
+              "addressCountry": "Canada",
+              "addressLocality": "Toronto"
+            }
+          }
+        },
+        {
+          "location": "São Paulo",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "São Paulo",
+              "addressCountry": "Brazil",
+              "addressLocality": "São Paulo"
+            }
+          }
+        },
+        {
+          "location": "Bogota",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Bogota",
+              "addressCountry": "Colombia",
+              "addressLocality": "Bogota"
+            }
+          }
+        },
+        {
+          "location": "Virginia",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Virginia",
+              "addressCountry": "United States",
+              "addressLocality": "Virginia"
+            }
+          }
+        },
+        {
+          "location": "Buenos Aires",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Buenos Aires",
+              "addressCountry": "Argentina",
+              "addressLocality": "Buenos Aires"
+            }
+          }
+        },
+        {
+          "location": "Miami",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Florida",
+              "addressCountry": "United States",
+              "addressLocality": "Miami"
+            }
+          }
+        }
+      ],
+      "publishedAt": "2026-10-22T20:54:23.348+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "California",
+          "addressCountry": "United States",
+          "addressLocality": "Palo Alto"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/fac13a25-9ede-43a9-b644-ad0e2760cb6d",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/fac13a25-9ede-43a9-b644-ad0e2760cb6d/application"
+    },
+    {
+      "id": "f8f2a18f-464b-428d-9c8c-fe7eb84f0038",
+      "title": "Engineering Manager - Mexico ( Hybrid)",
+      "department": "Engineer",
+      "team": "Engineer",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-10-30T19:50:51.229+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/f8f2a18f-464b-428d-9c8c-fe7eb84f0038",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/f8f2a18f-464b-428d-9c8c-fe7eb84f0038/application"
+    },
+    {
+      "id": "6e6c71a8-122e-4b9f-ae9f-1d59ad8878ef",
+      "title": "AML Ops Analyst",
+      "department": "Operations",
+      "team": "Operations",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-03T20:25:16.934+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/6e6c71a8-122e-4b9f-ae9f-1d59ad8878ef",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/6e6c71a8-122e-4b9f-ae9f-1d59ad8878ef/application"
+    },
+    {
+      "id": "8bf394b9-1a47-43b5-b217-3279094e8bfc",
+      "title": "Staff Software Engineer",
+      "department": "Engineer",
+      "team": "Engineer",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [
+        {
+          "location": "Ciudad de México",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Mexico City",
+              "addressCountry": "Mexico",
+              "addressLocality": "Mexico City"
+            }
+          }
+        }
+      ],
+      "publishedAt": "2026-11-12T12:49:44.410+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/8bf394b9-1a47-43b5-b217-3279094e8bfc",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/8bf394b9-1a47-43b5-b217-3279094e8bfc/application"
+    },
+    {
+      "id": "d3f6c80b-d627-43b3-98a0-1e523cfb5cfc",
+      "title": "Internal Audit Senior Specialist ",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-18T23:30:56.890+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/d3f6c80b-d627-43b3-98a0-1e523cfb5cfc",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/d3f6c80b-d627-43b3-98a0-1e523cfb5cfc/application"
+    },
+    {
+      "id": "82b51592-1504-4ab8-8916-29e9b3f4ed86",
+      "title": "Lawyer - Disputes Resolution Team (Banking)",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-11T17:31:21.174+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/82b51592-1504-4ab8-8916-29e9b3f4ed86",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/82b51592-1504-4ab8-8916-29e9b3f4ed86/application"
+    },
+    {
+      "id": "c85ad158-3399-4e89-be9d-f6c8669fafe9",
+      "title": "Global Engineering Director - US",
+      "department": "Executive",
+      "team": "Executive",
+      "employmentType": "FullTime",
+      "location": "Palo Alto",
+      "secondaryLocations": [
+        {
+          "location": "Virginia",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Virginia",
+              "addressCountry": "United States",
+              "addressLocality": "Virginia"
+            }
+          }
+        },
+        {
+          "location": "Miami",
+          "address": {
+            "postalAddress": {
+              "addressRegion": "Florida",
+              "addressCountry": "United States",
+              "addressLocality": "Miami"
+            }
+          }
+        }
+      ],
+      "publishedAt": "2026-11-13T12:57:23.001+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "California",
+          "addressCountry": "United States",
+          "addressLocality": "Palo Alto"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/c85ad158-3399-4e89-be9d-f6c8669fafe9",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/c85ad158-3399-4e89-be9d-f6c8669fafe9/application"
+    },
+    {
+      "id": "24835c62-cdc3-4d97-9363-4a2b50e27daa",
+      "title": "FP&A - Credit Products & Strategic Planning",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-13T21:20:14.820+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/24835c62-cdc3-4d97-9363-4a2b50e27daa",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/24835c62-cdc3-4d97-9363-4a2b50e27daa/application"
+    },
+    {
+      "id": "47a26b39-4781-448b-84d4-c4a9ca9d7ee8",
+      "title": "FP&A Senior Specialist",
+      "department": "Enterprise Functions",
+      "team": "Enterprise Functions",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-13T21:29:13.792+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/47a26b39-4781-448b-84d4-c4a9ca9d7ee8",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/47a26b39-4781-448b-84d4-c4a9ca9d7ee8/application"
+    },
+    {
+      "id": "83799359-32dd-45f8-8857-d86a9a3a2523",
+      "title": "Senior Product Manager - Registration Experience",
+      "department": "Product",
+      "team": "Product",
+      "employmentType": "FullTime",
+      "location": "Ciudad de México",
+      "secondaryLocations": [],
+      "publishedAt": "2026-11-18T21:03:06.573+00:00",
+      "isListed": true,
+      "isRemote": false,
+      "workplaceType": "OnSite",
+      "address": {
+        "postalAddress": {
+          "addressRegion": "Mexico City",
+          "addressCountry": "Mexico",
+          "addressLocality": "Mexico City"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/nubank/83799359-32dd-45f8-8857-d86a9a3a2523",
+      "applyUrl": "https://jobs.ashbyhq.com/nubank/83799359-32dd-45f8-8857-d86a9a3a2523/application"
+    }
+  ]
+}

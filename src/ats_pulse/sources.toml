@@ -1,0 +1,9 @@
+# Job boards to poll. Adding a company is one [[sources]] entry.
+#   company: display name, used in emails and as the health key (health#<company>)
+#   ats:     which adapter parses the board (supported: ashby)
+#   slug:    the company's board name in that ATS (e.g. jobs.ashbyhq.com/<slug>)
+
+[[sources]]
+company = "Nubank"
+ats     = "ashby"
+slug    = "nubank"
