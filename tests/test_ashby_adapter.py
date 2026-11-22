@@ -67,3 +67,11 @@ def test_fetches_the_board_url_for_the_slug(ashby_payload, nubank):
 
     assert requested == ["https://api.ashbyhq.com/posting-api/job-board/nubank"]
     assert len(jobs) == 26
+
+
+def test_url_and_date_are_always_text(nubank):
+    """The digest sorts by date and parses the URL; a non-text value must not break it."""
+    payload = {"jobs": [{"id": "1", "title": "Engineer", "jobUrl": 12345, "publishedAt": 1732060800}]}
+    [job], _ = ashby.parse(payload, nubank)
+
+    assert (job.url, job.published_at) == ("12345", "1732060800")

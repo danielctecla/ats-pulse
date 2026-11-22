@@ -46,8 +46,8 @@ def _normalize(raw: dict, source: Source) -> Job:
         location=(raw.get("location") or "").strip(),
         department=(raw.get("department") or "").strip(),
         team=(raw.get("team") or "").strip(),
-        url=raw.get("jobUrl") or raw.get("applyUrl") or "",
-        published_at=raw.get("publishedAt") or "",
+        url=str(raw.get("jobUrl") or raw.get("applyUrl") or "").strip(),
+        published_at=str(raw.get("publishedAt") or ""),
         secondary_locations=tuple(s["location"].strip() for s in secondary if s.get("location")),
         countries=tuple(c for c in countries if c),
     )
