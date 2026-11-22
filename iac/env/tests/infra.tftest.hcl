@@ -44,6 +44,11 @@ override_resource {
   values = { arn = "arn:aws:iam::123456789012:role/ats-pulse-scheduler" }
 }
 
+override_resource {
+  target = aws_sns_topic.alarms
+  values = { arn = "arn:aws:sns:us-east-1:123456789012:ats-pulse-alarms" }
+}
+
 run "lambda_policy_only_references_own_resources" {
   command = apply
 
@@ -149,6 +154,45 @@ run "notification_email_stays_sensitive" {
   assert {
     condition     = issensitive(aws_lambda_function.this.environment[0].variables["NOTIFICATION_EMAIL"])
     error_message = "NOTIFICATION_EMAIL in the Lambda environment must be sensitive."
+  }
+}
+
+run "crash_alarm_emails_through_sns" {
+  command = apply
+
+  assert {
+    condition     = aws_cloudwatch_metric_alarm.lambda_errors.namespace == "AWS/Lambda" && aws_cloudwatch_metric_alarm.lambda_errors.metric_name == "Errors"
+    error_message = "Alarm must watch the Lambda Errors metric."
+  }
+
+  assert {
+    condition     = aws_cloudwatch_metric_alarm.lambda_errors.dimensions["FunctionName"] == "ats-pulse"
+    error_message = "Alarm must watch this function only."
+  }
+
+  assert {
+    condition     = aws_cloudwatch_metric_alarm.lambda_errors.threshold == 1 && aws_cloudwatch_metric_alarm.lambda_errors.comparison_operator == "GreaterThanOrEqualToThreshold"
+    error_message = "Alarm must fire on a single failed invocation."
+  }
+
+  assert {
+    condition     = aws_cloudwatch_metric_alarm.lambda_errors.treat_missing_data == "notBreaching"
+    error_message = "Hours without runs must not trigger the alarm."
+  }
+
+  assert {
+    condition     = aws_cloudwatch_metric_alarm.lambda_errors.alarm_actions == toset(["arn:aws:sns:us-east-1:123456789012:ats-pulse-alarms"])
+    error_message = "Alarm must notify the project's SNS topic."
+  }
+
+  assert {
+    condition     = aws_sns_topic_subscription.alarm_email.protocol == "email" && aws_sns_topic_subscription.alarm_email.topic_arn == "arn:aws:sns:us-east-1:123456789012:ats-pulse-alarms"
+    error_message = "The topic must have an email subscription."
+  }
+
+  assert {
+    condition     = issensitive(aws_sns_topic_subscription.alarm_email.endpoint)
+    error_message = "The subscription endpoint is the email and must be sensitive."
   }
 }
 
