@@ -1,4 +1,4 @@
-"""Common job schema every ATS adapter normalizes to."""
+"""Common job schema every ATS adapter normalizes to, and what the emails are built from."""
 
 from dataclasses import dataclass, field
 
@@ -36,3 +36,22 @@ class Job:
             "published_at": self.published_at,
             "first_seen_at": first_seen_at,
         }
+
+
+@dataclass(frozen=True)
+class NewJob:
+    """A job for the digest."""
+
+    job: Job
+    location: str  # display location (Mexico-aware), as stored
+
+
+@dataclass(frozen=True)
+class SourceAlert:
+    """A source that has kept failing, for the alert email."""
+
+    company: str
+    source: str
+    consecutive_failures: int
+    last_error: str
+

@@ -54,19 +54,29 @@ class Store:
                 raise
 
     # --- source health ----------------------------------------------------
-    def record_failure(self, company: str, error: str) -> int:
-        """Increment consecutive_failures and return the new value."""
+    def record_failure(self, company: str, error: str) -> tuple[int, bool]:
+        """Increment consecutive_failures. Returns (failures, alert_sent) for this outage."""
         response = self.table.update_item(
             Key={"pk": f"health#{company}"},
             UpdateExpression="ADD consecutive_failures :one SET last_error = :error",
             ExpressionAttributeValues={":one": 1, ":error": error[:MAX_ERROR_LENGTH]},
-            ReturnValues="UPDATED_NEW",
+            ReturnValues="ALL_NEW",  # same write cost, and includes alert_sent
         )
-        return int(response["Attributes"]["consecutive_failures"])
+        item = response["Attributes"]
+        return int(item["consecutive_failures"]), bool(item.get("alert_sent", False))
 
-    def record_success(self, company: str, now: str) -> None:
+    def mark_alert_sent(self, company: str) -> None:
+        """Called only after the alert email went out, so a failed send is retried next run."""
         self.table.update_item(
             Key={"pk": f"health#{company}"},
-            UpdateExpression="SET consecutive_failures = :zero, last_success_at = :now",
+            UpdateExpression="SET alert_sent = :true",
+            ExpressionAttributeValues={":true": True},
+        )
+
+    def record_success(self, company: str, now: str) -> None:
+        """Reset the counter and re-arm the alert for the next outage."""
+        self.table.update_item(
+            Key={"pk": f"health#{company}"},
+            UpdateExpression="SET consecutive_failures = :zero, last_success_at = :now REMOVE alert_sent",
             ExpressionAttributeValues={":zero": 0, ":now": now},
         )

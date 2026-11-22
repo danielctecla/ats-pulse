@@ -4,6 +4,8 @@ from pathlib import Path
 import boto3
 import pytest
 from moto import mock_aws
+from moto.core import DEFAULT_ACCOUNT_ID
+from moto.ses.models import ses_backends
 
 from ats_pulse.config import Source
 from ats_pulse.models import Job
@@ -11,6 +13,7 @@ from ats_pulse.store import Store
 
 FIXTURES = Path(__file__).parent / "fixtures"
 TABLE_NAME = "ats-pulse-test"
+EMAIL = "test@example.com"
 
 
 @pytest.fixture(autouse=True)
@@ -24,14 +27,32 @@ def fake_aws_env(monkeypatch):
 
 
 @pytest.fixture
-def table():
+def aws():
     with mock_aws():
-        yield boto3.resource("dynamodb").create_table(
-            TableName=TABLE_NAME,
-            KeySchema=[{"AttributeName": "pk", "KeyType": "HASH"}],
-            AttributeDefinitions=[{"AttributeName": "pk", "AttributeType": "S"}],
-            BillingMode="PAY_PER_REQUEST",
-        )
+        yield
+
+
+@pytest.fixture
+def table(aws):
+    return boto3.resource("dynamodb").create_table(
+        TableName=TABLE_NAME,
+        KeySchema=[{"AttributeName": "pk", "KeyType": "HASH"}],
+        AttributeDefinitions=[{"AttributeName": "pk", "AttributeType": "S"}],
+        BillingMode="PAY_PER_REQUEST",
+    )
+
+
+@pytest.fixture
+def ses(aws):
+    """sesv2 client with the notification address already verified."""
+    client = boto3.client("sesv2")
+    client.create_email_identity(EmailIdentity=EMAIL)
+    return client
+
+
+def sent_emails() -> list:
+    """Messages moto accepted (it keeps the HTML body when there is one)."""
+    return ses_backends[DEFAULT_ACCOUNT_ID]["us-east-1"].sent_messages
 
 
 @pytest.fixture
@@ -67,13 +88,20 @@ def make_job(**overrides) -> Job:
 
 
 class FakeNotifier:
+    """Records what would be sent. Set fail_digest / fail_alert to make a send raise."""
+
     def __init__(self):
         self.digests, self.alerts = [], []
+        self.fail_digest = self.fail_alert = False
 
     def send_digest(self, new_jobs):
+        if self.fail_digest:
+            raise RuntimeError("SES is down")
         self.digests.append(new_jobs)
 
     def send_alert(self, alerts):
+        if self.fail_alert:
+            raise RuntimeError("SES is down")
         self.alerts.append(alerts)
 
 

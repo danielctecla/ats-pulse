@@ -1,5 +1,7 @@
 """Run the real pipeline against the live job-board APIs with an in-memory
-(moto) DynamoDB. Nothing touches AWS. Runs twice to show deduplication.
+(moto) DynamoDB. Nothing touches AWS and no email is sent: each email's text is
+printed and the digest's HTML is written to preview.html. Runs twice to show
+deduplication.
 
     make run-local
 """
@@ -8,6 +10,8 @@ import json
 import logging
 import os
 import sys
+import textwrap
+from pathlib import Path
 
 # Fake credentials before boto3 loads: this script must never reach a real account
 os.environ.update(
@@ -21,11 +25,12 @@ for name in ("AWS_PROFILE", "AWS_SESSION_TOKEN"):
 import boto3  # noqa: E402
 from moto import mock_aws  # noqa: E402
 
-from ats_pulse import pipeline  # noqa: E402
+from ats_pulse import emails, pipeline  # noqa: E402
 from ats_pulse.config import load_sources  # noqa: E402
 from ats_pulse.store import Store  # noqa: E402
 
 STANDARD_ATTRS = set(vars(logging.makeLogRecord({}))) | {"message", "asctime"}
+PREVIEW = Path(__file__).resolve().parents[1] / "preview.html"  # gitignored
 
 
 class JsonLines(logging.Formatter):
@@ -36,17 +41,23 @@ class JsonLines(logging.Formatter):
         return json.dumps({"level": record.levelname, "message": record.getMessage(), **extra}, ensure_ascii=False)
 
 
-class PrintNotifier:
+class PreviewNotifier:
+    """Prints each email instead of sending it; the digest HTML goes to preview.html."""
+
     def send_digest(self, new_jobs):
-        print(f"\n  Digest would contain {len(new_jobs)} job(s):")
-        for n in sorted(new_jobs, key=lambda n: (n.job.company, n.job.title)):
-            print(f"   - [{n.job.company}] {n.job.title}")
-            print(f"       {n.location} | published {n.job.published_at[:10]} | {n.job.url}")
+        email = emails.digest(new_jobs)
+        PREVIEW.write_text(email.html, encoding="utf-8")
+        self.show(email, f"HTML version written to {PREVIEW}")
 
     def send_alert(self, alerts):
-        print(f"\n  Alert would list {len(alerts)} failing source(s):")
-        for a in alerts:
-            print(f"   - {a.company} ({a.source}): {a.last_error}")
+        self.show(emails.alert(alerts))
+
+    @staticmethod
+    def show(email, note=""):
+        print(f"\n  Subject: {email.subject}")
+        print(textwrap.indent(email.text, "  | ", lambda line: True), end="")
+        if note:
+            print(f"  ({note})")
 
 
 def main():
@@ -66,7 +77,7 @@ def main():
 
         for label in ("Run 1 (empty table)", "Run 2 (same table, should find nothing new)"):
             print(f"\n=== {label} ===")
-            pipeline.run(sources, store, PrintNotifier())
+            pipeline.run(sources, store, PreviewNotifier())
 
         items = table.scan()["Items"]
         jobs = sum(1 for i in items if i["pk"].startswith("job#"))

@@ -1,3 +1,5 @@
+import pytest
+
 from ats_pulse import pipeline
 from ats_pulse.config import Source
 from ats_pulse.fetch import SourceError
@@ -61,3 +63,27 @@ def test_alert_rearms_after_recovery(store, notifier):
         run(store, notifier, adapter)
 
     assert len(notifier.alerts) == 2
+
+
+def test_failed_alert_is_retried_next_run(store, table, notifier):
+    run(store, notifier, failing)
+    notifier.fail_alert = True
+    with pytest.raises(pipeline.NotificationError):
+        run(store, notifier, failing)  # 2nd failure: alert due, but the send fails
+    assert "alert_sent" not in health(table)
+
+    notifier.fail_alert = False
+    run(store, notifier, failing)  # 3rd failure: alert retried
+    assert len(notifier.alerts) == 1
+    assert notifier.alerts[0][0].consecutive_failures == 3
+    assert health(table)["alert_sent"] is True
+
+    run(store, notifier, failing)
+    assert len(notifier.alerts) == 1  # sent once per outage
+
+
+def test_recovery_clears_alert_sent(store, table, notifier):
+    for adapter in (failing, failing, working):
+        run(store, notifier, adapter)
+
+    assert "alert_sent" not in health(table)

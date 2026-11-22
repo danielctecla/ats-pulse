@@ -1,36 +1,55 @@
-"""Where the digest and alerts go.
+"""Sends the digest and alerts through SES (v2 API).
 
-Phase 2 placeholder: LogNotifier only logs counts. Phase 3 adds the SES notifier.
+The notification address is both sender and recipient (the verified SES
+identity), so the account can stay in the SES sandbox. It is never logged:
+SES error messages can contain it, so they are redacted before being raised.
 """
 
 import logging
-from dataclasses import dataclass
+import re
+from email.utils import formataddr
 
-from .models import Job
+from botocore.exceptions import ClientError
+
+from . import emails
+from .models import NewJob, SourceAlert
 
 logger = logging.getLogger(__name__)
 
-
-@dataclass(frozen=True)
-class NewJob:
-    job: Job
-    location: str  # display location (Mexico-aware), as stored
+SENDER_NAME = "ats-pulse"
 
 
-@dataclass(frozen=True)
-class SourceAlert:
-    company: str
-    source: str
-    consecutive_failures: int
-    last_error: str
+class EmailError(RuntimeError):
+    """SES rejected or failed a send. The message never contains the address."""
 
 
-class LogNotifier:
+class SesNotifier:
+    def __init__(self, client, address: str):
+        """client: a boto3 sesv2 client. address: the verified identity."""
+        self.client = client
+        self.address = address
+
     def send_digest(self, new_jobs: list[NewJob]) -> None:
-        logger.info("digest not sent (email arrives in Phase 3)", extra={"new": len(new_jobs)})
+        self._send("digest", emails.digest(new_jobs))
 
     def send_alert(self, alerts: list[SourceAlert]) -> None:
-        logger.warning(
-            "alert not sent (email arrives in Phase 3)",
-            extra={"failing_sources": [a.source for a in alerts]},
-        )
+        self._send("alert", emails.alert(alerts))
+
+    def _send(self, kind: str, email: emails.Email) -> None:
+        body = {"Text": {"Data": email.text, "Charset": "UTF-8"}}
+        if email.html:
+            body["Html"] = {"Data": email.html, "Charset": "UTF-8"}
+        try:
+            response = self.client.send_email(
+                FromEmailAddress=formataddr((SENDER_NAME, self.address)),
+                Destination={"ToAddresses": [self.address]},
+                Content={"Simple": {"Subject": {"Data": email.subject, "Charset": "UTF-8"}, "Body": body}},
+            )
+        except ClientError as exc:
+            error = exc.response.get("Error", {})
+            message = self.redact(f"SES {error.get('Code', 'error')}: {error.get('Message', '')}")
+            raise EmailError(f"{kind} email not sent: {message}") from None  # drop the unredacted original
+        logger.info("email sent", extra={"kind": kind, "message_id": response["MessageId"]})
+
+    def redact(self, text: str) -> str:
+        return re.sub(re.escape(self.address), "<notification email>", text, flags=re.IGNORECASE)

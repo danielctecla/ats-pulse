@@ -1,6 +1,8 @@
 """Per source: fetch -> Mexico -> engineering -> dedupe. Then notify and save.
 
 A failing source is logged and counted in its health item; the others still run.
+The alert and the digest are sent independently: if either email fails, the
+other still goes out, and the run raises at the end so the crash alarm fires.
 """
 
 import logging
@@ -10,12 +12,16 @@ from datetime import UTC, datetime
 from .adapters import ADAPTERS
 from .config import Source
 from .filters import is_engineering, is_mexico, mexico_location
-from .notify import NewJob, SourceAlert
-from .store import Store
+from .models import NewJob, SourceAlert
+from .store import MAX_ERROR_LENGTH, Store
 
 logger = logging.getLogger(__name__)
 
-ALERT_AFTER_FAILURES = 2  # alert once, when a source reaches this many failures in a row
+ALERT_AFTER_FAILURES = 2  # alert once per outage, from this many failures in a row
+
+
+class NotificationError(RuntimeError):
+    """An email could not be sent. Raised after the run so the crash alarm fires."""
 
 
 @dataclass
@@ -56,6 +62,17 @@ def process_source(source: Source, store: Store, adapters=ADAPTERS) -> SourceRes
     return SourceResult(source, len(jobs), len(mexico), len(engineering), new, skipped)
 
 
+def try_send(send, items: list, kind: str, failed: list[str]) -> bool:
+    """Send one email. On failure log it, add it to failed and return False."""
+    try:
+        send(items)
+    except Exception:
+        logger.exception(f"{kind} email failed", extra={"items": len(items)})
+        failed.append(kind)
+        return False
+    return True
+
+
 def run(sources: list[Source], store: Store, notifier, adapters=ADAPTERS, now=utc_now) -> dict:
     results, alerts = [], []
 
@@ -63,10 +80,11 @@ def run(sources: list[Source], store: Store, notifier, adapters=ADAPTERS, now=ut
         try:
             result = process_source(source, store, adapters)
         except Exception as exc:  # any source failure must not stop the others
-            error = f"{type(exc).__name__}: {exc}"
+            error = f"{type(exc).__name__}: {exc}"[:MAX_ERROR_LENGTH]
             result = SourceResult(source, errors=1, error=error)
-            failures = store.record_failure(source.company, error)
-            if failures == ALERT_AFTER_FAILURES:
+            failures, alert_sent = store.record_failure(source.company, error)
+            # ">=" rather than "==": an alert whose email failed is retried next run
+            if failures >= ALERT_AFTER_FAILURES and not alert_sent:
                 alerts.append(SourceAlert(source.company, source.key, failures, error))
             logger.warning("source summary", extra=result.log_fields())
         else:
@@ -74,17 +92,23 @@ def run(sources: list[Source], store: Store, notifier, adapters=ADAPTERS, now=ut
             logger.info("source summary", extra=result.log_fields())
         results.append(result)
 
-    if alerts:
-        notifier.send_alert(alerts)
-
-    # Save only after the digest went out: if sending fails, the run fails and
-    # the same jobs are picked up again next run instead of being lost.
+    # Send both emails before any bookkeeping, so neither a failed send nor a
+    # failed DynamoDB write can hold back the other email.
+    failed_emails = []
     new_jobs = [n for r in results for n in r.new_jobs]
-    if new_jobs:
-        notifier.send_digest(new_jobs)
+    alert_ok = bool(alerts) and try_send(notifier.send_alert, alerts, "alert", failed_emails)
+    digest_ok = bool(new_jobs) and try_send(notifier.send_digest, new_jobs, "digest", failed_emails)
+
+    # Save only after the digest went out: if sending fails, the same jobs are
+    # picked up again next run instead of being lost.
+    if digest_ok:
         first_seen_at = now()
         for n in new_jobs:
             store.save_job(n.job, n.location, first_seen_at)
+    # Mark only after the alert went out, so a failed alert is retried next run.
+    if alert_ok:
+        for alert in alerts:
+            store.mark_alert_sent(alert.company)
 
     summary = {
         "sources": len(results),
@@ -92,5 +116,7 @@ def run(sources: list[Source], store: Store, notifier, adapters=ADAPTERS, now=ut
         "new": len(new_jobs),
         "alerts": len(alerts),
     }
-    logger.info("run summary", extra=summary)
+    logger.info("run summary", extra={**summary, "failed_emails": failed_emails})
+    if failed_emails:
+        raise NotificationError(f"could not send: {', '.join(failed_emails)}")
     return summary

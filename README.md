@@ -15,7 +15,7 @@ EventBridge Scheduler ──► Lambda (Python, stdlib + boto3) ──► Dynamo
 |-------|-------|-------|
 | 1 | Infrastructure (Terraform, local state) | done |
 | 2 | Fetch, filter, dedupe, source health, crash alarm | done |
-| 3 | SES emails: HTML digest and plain alert | pending. Digests and alerts are only logged for now |
+| 3 | SES emails: HTML digest and plain alert | done |
 | 4 | S3 remote state + GitHub Actions (OIDC) | pending |
 
 ## Requirements
@@ -27,7 +27,7 @@ EventBridge Scheduler ──► Lambda (Python, stdlib + boto3) ──► Dynamo
 
 ```bash
 make test        # creates .venv from requirements-dev.txt, runs pytest + moto
-make run-local   # polls the real job boards, in-memory DynamoDB, prints what a digest would contain
+make run-local   # polls the real job boards, in-memory DynamoDB; prints the emails, writes preview.html
 make test-infra  # terraform test with mocked providers
 ```
 
@@ -42,7 +42,8 @@ src/ats_pulse/              Lambda code (stdlib + boto3, zipped as is)
   filters.py                Mexico and engineering rules
   pipeline.py               per source: fetch -> filter -> dedupe; then notify and save
   store.py                  DynamoDB access (jobs and source health)
-  notify.py                 digest and alert delivery
+  emails.py                 digest (HTML + plain text) and alert content
+  notify.py                 sends them through SES
   handler.py                Lambda entry point
 tests/                      pytest + moto; fixtures/ holds a real Ashby response, trimmed
 scripts/run_local.py        backs make run-local
@@ -65,14 +66,31 @@ Each run, for every source in [sources.toml](src/ats_pulse/sources.toml):
 
 After all sources:
 
-5. **Alert** if any source just reached 2 consecutive failures.
+5. **Alert** for each source that has failed 2 or more runs in a row and hasn't been alerted yet in this outage.
 6. **Digest** of all new jobs (no email when there's nothing new).
-7. **Save** the new jobs. This happens only after the digest is sent: if sending fails, the run fails, the crash alarm fires, and the same jobs are retried next run instead of being lost.
+7. **Save** the new jobs, only after the digest is sent.
+
+The alert and the digest are sent independently: if one fails, the other still goes out, then the run fails so the crash alarm fires. Nothing is lost:
+- A failed digest: its jobs weren't saved, so the next run finds and sends them again.
+- A failed alert: the source isn't marked as alerted, so the next run retries it.
+
+The reverse can happen too: an email goes out but the save after it fails. Then the next run sends it again. A duplicate email is the trade-off for never losing one.
 
 Behavior to know about:
 - The first run against an empty table reports every current matching opening. Later runs only report new ones.
 - When Mexico is only a secondary location, the job's location reads `Ciudad de México (also Palo Alto)`.
 - The stored link is the job's posting page, which has the apply button.
+
+### Emails
+
+Both are sent from and to the notification address, with the sender name `ats-pulse`.
+
+| Email | Subject | Format |
+|-------|---------|--------|
+| Digest | `7 new engineering jobs in Mexico: Nubank` | HTML plus a plain-text part. Grouped by company (A–Z), newest posting first: title (linked), location, department, posting date. |
+| Alert | `Job board failing: Nubank` | Plain text: each failing source, failed runs in a row, last error. |
+
+`make run-local` prints both as plain text and writes the digest's HTML to `preview.html` (gitignored) so you can open it in a browser.
 
 ### Adding a company
 
@@ -80,7 +98,7 @@ Add one entry to `sources.toml`:
 
 ```toml
 [[sources]]
-company = "Nubank"   # display name, also the health key
+company = "Nubank"   # display name, also the health key (must be unique)
 ats     = "ashby"    # supported: ashby
 slug    = "nubank"   # the company's board name in that ATS
 ```
@@ -94,7 +112,7 @@ One DynamoDB table (on-demand), partition key `pk`:
 | Item | `pk` | Attributes |
 |------|------|------------|
 | Job | `job#<ats>:<slug>#<job_id>` | job_id, source, company, title, location, department, url, published_at, first_seen_at |
-| Source health | `health#<company>` | consecutive_failures, last_error, last_success_at |
+| Source health | `health#<company>` | consecutive_failures, last_error, last_success_at, alert_sent (set after the alert email goes out; removed on recovery) |
 
 Job descriptions aren't stored: they aren't needed, and DynamoDB items are limited to 400 KB.
 
@@ -102,8 +120,8 @@ Job descriptions aren't stored: they aren't needed, and DynamoDB items are limit
 
 | Failure | Handled by | You get |
 |---------|------------|---------|
-| One source fails (HTTP error, timeout, invalid JSON) | Per-source error handling. The other sources still run. | One SES alert when it reaches 2 consecutive failures. Not repeated while it keeps failing; re-armed once it recovers. |
-| The whole Lambda fails (timeout, out of memory, import error, unhandled exception, failed digest send) | CloudWatch alarm on the Lambda `Errors` metric | An SNS email for each failed run |
+| One source fails (HTTP error, timeout, invalid JSON) | Per-source error handling. The other sources still run. | One SES alert once it has failed 2 runs in a row (retried next run if that email fails). Not repeated while it keeps failing; re-armed once it recovers. |
+| The whole Lambda fails (timeout, out of memory, import error, unhandled exception, failed digest or alert email) | CloudWatch alarm on the Lambda `Errors` metric | An SNS email for each failed run |
 
 The crash alarm goes through SNS rather than SES, so it still arrives when the Lambda or SES is what's broken.
 
@@ -146,7 +164,7 @@ Terraform inputs ([iac/env/variables.tf](iac/env/variables.tf)). `*.tfvars` file
 ```bash
 make help        # list targets
 make test        # pytest + moto
-make run-local   # real job-board APIs, in-memory DynamoDB
+make run-local   # real job-board APIs, in-memory DynamoDB, emails printed
 make fmt         # format Terraform
 make validate    # fmt -check + terraform validate
 make test-infra  # terraform test with mocked providers
@@ -167,6 +185,16 @@ After the first apply AWS sends two emails to the notification address. Click bo
 
 The account can stay in the SES sandbox: it only ever emails the verified address.
 
+Then check it end to end with one manual run (use your `project_name` and `aws_region` if you changed them):
+
+```bash
+aws lambda invoke --function-name ats-pulse --region us-east-1 --cli-read-timeout 0 /dev/stdout
+```
+
+`--cli-read-timeout 0` waits for the whole run; otherwise the CLI retries after 60 s and could start a second run. The table starts empty, so this first run emails every current matching opening. If the digest arrives, fetching, DynamoDB and SES all work. Later runs only email when something is new. A `FunctionError` in the response means the run failed: the CloudWatch logs have the details, and the crash alarm emails you too.
+
+**Using a Gmail (or other webmail) address:** SES sends "from" your own address but can't sign mail for gmail.com, so it fails Gmail's DMARC check. gmail.com's policy is `p=none`, so the mail is still delivered, but the first emails may land in spam. Mark them as not spam or add a filter. For reliable delivery, use an address on a domain you own and verify the domain in SES with Easy DKIM.
+
 ## Security
 
 - **Least-privilege IAM:**
@@ -174,8 +202,9 @@ The account can stay in the SES sandbox: it only ever emails the verified addres
   - The scheduler role can only invoke this function, and only from this account.
 - **Notification email:**
   - It's a sensitive Terraform variable with no default, so it shows as `(sensitive value)` in plans.
-  - It's never logged or output, and tests use `test@example.com`.
+  - It's never logged or output, and tests use `test@example.com`. SES error messages can contain it, so it's redacted from them before they're raised or logged.
   - It does end up in Terraform state in plaintext, so never share or commit state files.
+- **Email content:** everything that comes from a job board is HTML-escaped, and only `http(s)` links are rendered.
 - **No async retries:** the Lambda has async retries disabled, so a crash can't send the same digest twice. The next scheduled run picks up instead.
 
 ## Cost
