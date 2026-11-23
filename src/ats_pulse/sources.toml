@@ -4,18 +4,24 @@
 #   slug:    the company's board name in that ATS
 #            (jobs.ashbyhq.com/<slug>, boards-api.greenhouse.io/v1/boards/<slug>;
 #            Workday: <tenant>.<wdN>/<site> from <tenant>.<wdN>.myworkdayjobs.com/<site>)
+#   logo:    optional https URL of a PNG/JPEG, shown in the digest instead of the name.
+#            Gmail doesn't show SVG or embedded images, so use a hosted PNG
+#            (e.g. Wikimedia Commons renders logos as PNG thumbnails).
 
 [[sources]]
 company = "Nubank"
 ats     = "ashby"
 slug    = "nubank"
+logo    = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Nubank_logo_2021.svg/330px-Nubank_logo_2021.svg.png"
 
 [[sources]]
 company = "Lyft"
 ats     = "greenhouse"
 slug    = "lyft"
+logo    = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Lyft_logo.svg/330px-Lyft_logo.svg.png"
 
 [[sources]]
 company = "Salesforce"
 ats     = "workday"
 slug    = "salesforce.wd12/External_Career_Site"
+logo    = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/330px-Salesforce.com_logo.svg.png"

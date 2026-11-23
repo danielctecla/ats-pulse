@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 from .models import NewJob, SourceAlert
 
 FOOTER = "Sent by ats-pulse. Only openings not seen in earlier runs."
+CREDIT_NAME, CREDIT_URL = "danielctecla", "https://www.linkedin.com/in/danielctecla/"
 
 
 @dataclass(frozen=True)
@@ -90,12 +91,13 @@ def safe_url(url: str) -> str | None:
         return None
 
 
-def digest(new_jobs: list[NewJob], now: datetime | None = None) -> Email:
+def digest(new_jobs: list[NewJob], now: datetime | None = None, logos: dict[str, str] | None = None) -> Email:
+    """logos: company -> image URL, shown in the HTML instead of the company name."""
     now = now or datetime.now(UTC)
     groups = by_company(new_jobs)
     heading = f"{plural(len(new_jobs), 'new engineering job')} in Mexico"
     subject = f"{heading}: {name_list([company for company, _ in groups])}"
-    return Email(subject, digest_text(heading, groups, now), digest_html(heading, groups, now))
+    return Email(subject, digest_text(heading, groups, now), digest_html(heading, groups, now, logos or {}))
 
 
 def about(n: NewJob) -> str:
@@ -115,7 +117,7 @@ def digest_text(heading: str, groups: list[tuple[str, list[NewJob]]], now: datet
                 lines.append(f"  Posted {when}")
             if url := safe_url(n.job.url):
                 lines.append(f"  {url}")
-    lines += ["", "--", FOOTER]
+    lines += ["", "--", FOOTER, f"Built by {CREDIT_NAME}: {CREDIT_URL}"]
     return "\n".join(lines) + "\n"
 
 
@@ -147,6 +149,7 @@ DIGEST_HTML = """<!doctype html>
 {sections}
 <tr><td style="padding-top:44px;font-size:12px;line-height:1.5;color:{gray};">{footer}</td></tr>
 <tr><td style="padding-top:2px;font-size:64px;line-height:1;font-weight:800;letter-spacing:-0.05em;color:{watermark};">ats-pulse<span style="color:{red};">.</span></td></tr>
+<tr><td style="padding-top:10px;font-size:12px;line-height:1.5;color:{gray};">Built by <a href="{credit_url}" style="color:{ink};text-decoration:underline;">{credit_name}</a></td></tr>
 </table>
 </td></tr>
 </table>
@@ -156,8 +159,8 @@ DIGEST_HTML = """<!doctype html>
 
 SECTION_HTML = """<tr><td style="padding-top:40px;">
 <table {table}><tr>
-<td style="padding-bottom:8px;border-bottom:2px solid {ink};font-size:17px;font-weight:700;">{company}</td>
-<td align="right" style="padding-bottom:8px;border-bottom:2px solid {ink};font-size:14px;color:{gray};">{count}</td>
+<td valign="bottom" style="padding-bottom:8px;border-bottom:2px solid {ink};font-size:17px;line-height:1.2;font-weight:700;">{company}</td>
+<td align="right" valign="bottom" style="padding-bottom:8px;border-bottom:2px solid {ink};font-size:14px;color:{gray};">{count}</td>
 </tr></table>
 </td></tr>
 {jobs}"""
@@ -173,6 +176,8 @@ JOB_HTML = """<tr><td style="border-bottom:1px solid {hairline};">
 </td></tr>"""
 
 LINK_HTML = '<a href="{url}" style="color:{ink};text-decoration:none;">{title}</a>'
+# Height only: each logo keeps its own proportions. If images are blocked, the alt shows the name.
+LOGO_HTML = '<img src="{url}" alt="{company}" height="28" style="display:block;height:28px;border:0;">'
 
 
 def job_html(n: NewJob, now: datetime) -> str:
@@ -198,13 +203,19 @@ def about_html(n: NewJob) -> str:
     return " &middot; ".join([escape(n.location)] * bool(n.location) + labels)
 
 
-def digest_html(heading: str, groups: list[tuple[str, list[NewJob]]], now: datetime) -> str:
+def company_html(company: str, logo: str | None) -> str:
+    if logo and (url := safe_url(logo)):
+        return LOGO_HTML.format(url=escape(url, quote=True), company=escape(company, quote=True))
+    return escape(company)
+
+
+def digest_html(heading: str, groups: list[tuple[str, list[NewJob]]], now: datetime, logos: dict[str, str]) -> str:
     sections = [
         SECTION_HTML.format(
             table=TABLE,
             ink=INK,
             gray=GRAY,
-            company=escape(company),
+            company=company_html(company, logos.get(company)),
             count=len(jobs),
             jobs="\n".join(job_html(n, now) for n in jobs),
         )
@@ -225,6 +236,8 @@ def digest_html(heading: str, groups: list[tuple[str, list[NewJob]]], now: datet
         gray=GRAY,
         watermark=WATERMARK,
         red=RED,
+        credit_name=escape(CREDIT_NAME),
+        credit_url=escape(CREDIT_URL, quote=True),
     )
 
 

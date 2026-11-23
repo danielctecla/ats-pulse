@@ -12,6 +12,7 @@ class Source:
     company: str
     ats: str
     slug: str
+    logo: str = ""  # https URL of a PNG/JPEG shown in the digest instead of the name
 
     @property
     def key(self) -> str:
@@ -36,7 +37,10 @@ def load_sources(path: Path = SOURCES_FILE, supported_ats=None) -> list[Source]:
             raise ValueError(f"sources[{i}] is missing {sorted(missing)}")
         if entry["ats"] not in supported_ats:
             raise ValueError(f"sources[{i}]: unsupported ats {entry['ats']!r}")
-        sources.append(Source(entry["company"], entry["ats"], entry["slug"]))
+        logo = entry.get("logo", "")
+        if logo and not (isinstance(logo, str) and logo.startswith("https://")):
+            raise ValueError(f"sources[{i}]: logo must be an https URL")
+        sources.append(Source(entry["company"], entry["ats"], entry["slug"], logo))
 
     keys = [s.key for s in sources]
     if len(keys) != len(set(keys)):

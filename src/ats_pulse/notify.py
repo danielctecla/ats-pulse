@@ -24,13 +24,14 @@ class EmailError(RuntimeError):
 
 
 class SesNotifier:
-    def __init__(self, client, address: str):
-        """client: a boto3 sesv2 client. address: the verified identity."""
+    def __init__(self, client, address: str, logos: dict[str, str] | None = None):
+        """client: a boto3 sesv2 client. address: the verified identity. logos: company -> image URL."""
         self.client = client
         self.address = address
+        self.logos = logos or {}
 
     def send_digest(self, new_jobs: list[NewJob]) -> None:
-        self._send("digest", emails.digest(new_jobs))
+        self._send("digest", emails.digest(new_jobs, logos=self.logos))
 
     def send_alert(self, alerts: list[SourceAlert]) -> None:
         self._send("alert", emails.alert(alerts))

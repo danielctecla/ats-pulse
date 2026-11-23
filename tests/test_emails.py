@@ -110,7 +110,7 @@ def test_malformed_url_does_not_break_the_digest():
     email = emails.digest([new(url="https://[bad/job")])
 
     assert "Senior Software Engineer" in email.html
-    assert "href" not in email.html
+    assert "[bad" not in email.html
     assert "[bad" not in email.text
 
 
@@ -125,3 +125,35 @@ def test_alert_puts_a_multi_line_error_on_one_line():
     text = emails.alert([SourceAlert("Acme", "ashby:acme", 2, "ClientError:\n  line one\n  line two")]).text
 
     assert "Last error: ClientError: line one line two" in text
+
+
+LOGO = "https://upload.example.com/acme.png"
+
+
+def test_logo_replaces_the_company_name():
+    html = emails.digest([new()], NOW, logos={"Acme": LOGO}).html
+
+    assert f'<img src="{LOGO}" alt="Acme"' in html  # the alt shows the name if images are blocked
+    assert ">Acme</td>" not in html
+
+
+def test_company_without_a_logo_shows_its_name():
+    html = emails.digest([new()], NOW, logos={"Other": LOGO}).html
+
+    assert "<img" not in html
+    assert ">Acme</td>" in html
+
+
+def test_unsafe_logo_falls_back_to_the_name():
+    html = emails.digest([new(company="A&B")], NOW, logos={"A&B": "javascript:alert(1)"}).html
+
+    assert "javascript:" not in html
+    assert ">A&amp;B</td>" in html
+
+
+def test_digest_credits_the_author_in_both_parts():
+    email = emails.digest([new()], NOW)
+
+    assert '<a href="https://www.linkedin.com/in/danielctecla/"' in email.html
+    assert ">danielctecla</a>" in email.html
+    assert email.text.endswith("Built by danielctecla: https://www.linkedin.com/in/danielctecla/\n")

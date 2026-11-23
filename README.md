@@ -90,7 +90,7 @@ Both are sent from and to the notification address, with the sender name `ats-pu
 
 | Email | Subject | Format |
 |-------|---------|--------|
-| Digest | `7 new engineering jobs in Mexico: Acme, Globex` | HTML plus a plain-text part with the same content. Jobs grouped by company (A–Z), newest posting first, each with its title (linked to the posting), location, department, workplace and employment type when the board gives them, and posting date with its age (`Nov 19 · 3 days ago`). |
+| Digest | `7 new engineering jobs in Mexico: Acme, Globex` | HTML plus a plain-text part with the same content. Jobs grouped by company (A–Z) under the company's logo, newest posting first, each with its title (linked to the posting), location, department, workplace and employment type when the board gives them, and posting date with its age (`Nov 19 · 3 days ago`). Ends with a credit line linking to the author. |
 | Alert | `Job board failing: Acme` | Plain text: each failing source, failed runs in a row, last error. |
 
 `make run-local` prints both as plain text and writes the digest's HTML to `preview.html` (gitignored) so you can open it in a browser.
@@ -104,9 +104,12 @@ Add one entry to `sources.toml`:
 company = "Acme"         # display name, also the health key (must be unique)
 ats     = "greenhouse"   # supported: ashby, greenhouse, workday
 slug    = "acme"         # the company's board name in that ATS
+logo    = "https://upload.wikimedia.org/.../330px-Acme_logo.svg.png"  # optional
 ```
 
 The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`. For Workday it's `<tenant>.<wdN>/<site>`, taken from the careers site URL `https://<tenant>.<wdN>.myworkdayjobs.com/<site>` (e.g. `acme.wd5/External_Careers`).
+
+`logo` is optional: an https URL of a PNG or JPEG, shown in the digest instead of the company name (the name still shows if the mail client blocks images). Gmail doesn't render SVG or embedded `data:` images, so use a hosted PNG. Wikimedia Commons serves PNG renders of most logos (`upload.wikimedia.org/wikipedia/commons/thumb/.../330px-<file>.svg.png`).
 
 To support another ATS (e.g. Lever), add a module in `adapters/` with a `fetch_jobs(source)` function and register it in `adapters/__init__.py`.
 

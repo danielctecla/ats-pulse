@@ -15,5 +15,7 @@ logging.getLogger("ats_pulse").setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     store = Store(boto3.resource("dynamodb").Table(os.environ["TABLE_NAME"]))
-    notifier = SesNotifier(boto3.client("sesv2"), os.environ["NOTIFICATION_EMAIL"])
-    return pipeline.run(load_sources(), store, notifier)
+    sources = load_sources()
+    logos = {s.company: s.logo for s in sources if s.logo}
+    notifier = SesNotifier(boto3.client("sesv2"), os.environ["NOTIFICATION_EMAIL"], logos)
+    return pipeline.run(sources, store, notifier)

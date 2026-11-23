@@ -44,8 +44,11 @@ class JsonLines(logging.Formatter):
 class PreviewNotifier:
     """Prints each email instead of sending it; the digest HTML goes to preview.html."""
 
+    def __init__(self, logos):
+        self.logos = logos
+
     def send_digest(self, new_jobs):
-        email = emails.digest(new_jobs)
+        email = emails.digest(new_jobs, logos=self.logos)
         PREVIEW.write_text(email.html, encoding="utf-8")
         self.show(email, f"HTML version written to {PREVIEW}")
 
@@ -77,7 +80,7 @@ def main():
 
         for label in ("Run 1 (empty table)", "Run 2 (same table, should find nothing new)"):
             print(f"\n=== {label} ===")
-            pipeline.run(sources, store, PreviewNotifier())
+            pipeline.run(sources, store, PreviewNotifier({s.company: s.logo for s in sources if s.logo}))
 
         items = table.scan()["Items"]
         jobs = sum(1 for i in items if i["pk"].startswith("job#"))

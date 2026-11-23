@@ -41,6 +41,16 @@ def test_digest_has_html_and_text_parts_alert_only_text():
     assert digest_body["Text"]["Charset"] == "UTF-8"
 
 
+def test_digest_uses_the_logos_it_was_given():
+    client = RecordingClient()
+    SesNotifier(client, EMAIL, logos={"Acme": "https://example.com/acme.png"}).send_digest(
+        [NewJob(make_job(), "Ciudad de México")]
+    )
+
+    [call] = client.calls
+    assert '<img src="https://example.com/acme.png" alt="Acme"' in call["Content"]["Simple"]["Body"]["Html"]["Data"]
+
+
 def test_ses_error_is_raised_without_the_address(aws, caplog):
     """SES error messages include the address; it must not reach the logs."""
     caplog.set_level(logging.INFO)
