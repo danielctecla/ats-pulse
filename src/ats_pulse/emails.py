@@ -29,9 +29,10 @@ def plural(count: int, word: str) -> str:
 
 
 def name_list(names: list[str], limit: int = 3) -> str:
-    """"A, B, C +2 more" so a subject line stays short."""
-    shown = ", ".join(names[:limit])
-    return f"{shown} +{len(names) - limit} more" if len(names) > limit else shown
+    """"A", "A and B", "A, B and C", "A, B, C and 2 more": a subject line stays short."""
+    if len(names) > limit + 1:  # "and 1 more" would be as long as the name
+        return f"{', '.join(names[:limit])} and {len(names) - limit} more"
+    return " and ".join(filter(None, [", ".join(names[:-1]), names[-1]])) if names else ""
 
 
 # --- digest -----------------------------------------------------------------
@@ -96,7 +97,8 @@ def digest(new_jobs: list[NewJob], now: datetime | None = None, logos: dict[str,
     now = now or datetime.now(UTC)
     groups = by_company(new_jobs)
     heading = f"{plural(len(new_jobs), 'new engineering job')} in Mexico"
-    subject = f"{heading}: {name_list([company for company, _ in groups])}"
+    # Short and plain: the count goes in the inbox preview (preheader), not here
+    subject = f"Openings at {name_list([company for company, _ in groups])}"
     return Email(subject, digest_text(heading, groups, now), digest_html(heading, groups, now, logos or {}))
 
 
@@ -222,8 +224,8 @@ def digest_html(heading: str, groups: list[tuple[str, list[NewJob]]], now: datet
         for company, jobs in groups
     ]
     summary = " · ".join(f"{company} {len(jobs)}" for company, jobs in groups)
-    # Inbox preview line, instead of the first words of the body
-    preheader = ", ".join(f"{company} ({len(jobs)})" for company, jobs in groups)
+    # Inbox preview, shown after the subject instead of the first words of the body
+    preheader = f"{plural(sum(len(jobs) for _, jobs in groups), 'engineering opening')} in Mexico"
     return DIGEST_HTML.format(
         heading=escape(heading),
         summary=escape(summary),

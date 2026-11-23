@@ -17,7 +17,7 @@ def test_sends_digest_to_and_from_the_notification_address(ses):
     [message] = sent_emails()
     assert message.source == f"ats-pulse <{EMAIL}>"
     assert message.destinations["ToAddresses"] == [EMAIL]
-    assert message.subject == "1 new engineering job in Mexico: Acme"
+    assert message.subject == "Openings at Acme"
 
 
 class RecordingClient:

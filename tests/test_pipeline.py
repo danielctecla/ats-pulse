@@ -133,4 +133,4 @@ def test_handler_runs_configured_sources(
     assert second["new"] == 0
     assert json.dumps(first)  # JSON-serializable for the Lambda response
 
-    assert [m.subject for m in sent_emails()] == ["23 new engineering jobs in Mexico: Lyft, Nubank, Salesforce"]
+    assert [m.subject for m in sent_emails()] == ["Openings at Lyft, Nubank and Salesforce"]

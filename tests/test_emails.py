@@ -15,11 +15,24 @@ def new(**overrides) -> NewJob:
     return NewJob(job, job.location)
 
 
-def test_digest_subject_counts_jobs_and_names_companies():
-    assert emails.digest([new()]).subject == "1 new engineering job in Mexico: Acme"
+@pytest.mark.parametrize(
+    "companies, subject",
+    [
+        ("A", "Openings at A"),
+        ("BA", "Openings at A and B"),
+        ("CBA", "Openings at A, B and C"),
+        ("DCBA", "Openings at A, B, C and D"),
+        ("EDCBA", "Openings at A, B, C and 2 more"),
+    ],
+)
+def test_digest_subject_names_the_companies(companies, subject):
+    jobs = [new(job_id=str(i), company=c) for i, c in enumerate(companies)]
+    assert emails.digest(jobs).subject == subject
 
-    jobs = [new(job_id=str(i), company=c) for i, c in enumerate("EDCBA")]
-    assert emails.digest(jobs).subject == "5 new engineering jobs in Mexico: A, B, C +2 more"
+
+def test_inbox_preview_has_the_count():
+    html = emails.digest([new(job_id="1"), new(job_id="2", company="Beta")], NOW).html
+    assert 'overflow:hidden;">2 engineering openings in Mexico</div>' in html
 
 
 def test_digest_groups_companies_a_to_z_newest_job_first():
@@ -98,7 +111,7 @@ def test_alert_lists_each_failing_source():
     ]
     email = emails.alert(alerts)
 
-    assert email.subject == "Job boards failing: Acme, Beta"
+    assert email.subject == "Job boards failing: Acme and Beta"
     assert email.html is None
     assert "Acme (ashby:acme)" in email.text
     assert "Failed runs in a row: 3" in email.text
