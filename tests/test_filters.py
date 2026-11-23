@@ -1,9 +1,9 @@
 import pytest
 
-from ats_pulse.adapters import ashby, greenhouse
+from ats_pulse.adapters import ashby, greenhouse, workday
 from ats_pulse.filters import is_engineering, is_mexico, mexico_location
 
-from conftest import make_job
+from conftest import WORKDAY_RECORDED_ON, make_job, replay
 
 
 # --- Mexico -------------------------------------------------------------------
@@ -102,3 +102,12 @@ def test_real_greenhouse_response_selects_expected_jobs(greenhouse_payload, lyft
         "Software Engineer Intern, Backend (Summer 2027 - Mexico)",
         "Software Engineer Intern, Frontend (Summer 2027)",
     }
+
+
+def test_real_workday_response_selects_every_job(salesforce, workday_recording):
+    """The Workday adapter only fetches Mexico openings in engineering categories, so all pass,
+    including two analyst roles whose titles alone wouldn't."""
+    jobs, _ = workday.fetch_jobs(salesforce, post=replay(workday_recording), today=WORKDAY_RECORDED_ON)
+
+    assert all(is_mexico(j) and is_engineering(j) for j in jobs)
+    assert len(jobs) == 12

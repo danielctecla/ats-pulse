@@ -12,7 +12,7 @@ class Job:
     location: str  # primary location
     department: str
     url: str
-    published_at: str  # ISO 8601, as given by the ATS
+    published_at: str  # ISO 8601, as given by the ATS (Workday: a date, worked out from "Posted 3 Days Ago")
     # Not stored: used by the filters and the digest only
     team: str = ""
     secondary_locations: tuple[str, ...] = field(default=())

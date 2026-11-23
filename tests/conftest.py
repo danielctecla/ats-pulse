@@ -1,4 +1,6 @@
+import copy
 import json
+from datetime import date
 from pathlib import Path
 
 import boto3
@@ -80,6 +82,33 @@ def lyft():
 def greenhouse_payload():
     """Real Lyft response (2026-11-21), trimmed to 15 jobs (all 5 in Mexico)."""
     return json.loads((FIXTURES / "greenhouse_lyft.json").read_text(encoding="utf-8"))
+
+
+@pytest.fixture
+def salesforce():
+    return Source(company="Salesforce", ats="workday", slug="salesforce.wd12/External_Career_Site")
+
+
+WORKDAY_RECORDED_ON = date(2026, 11, 23)
+
+
+@pytest.fixture
+def workday_recording():
+    """Real Salesforce requests and responses (2026-11-23): the facet listing
+    (countries and locations trimmed), then the Mexico queries the adapter made."""
+    return json.loads((FIXTURES / "workday_salesforce.json").read_text(encoding="utf-8"))
+
+
+def replay(recording):
+    """A post() that answers the recorded requests and fails on any other."""
+
+    def post(url, payload):
+        for exchange in recording:
+            if exchange["request"] == payload:
+                return copy.deepcopy(exchange["response"])
+        raise AssertionError(f"unexpected request: {payload}")
+
+    return post
 
 
 def make_job(**overrides) -> Job:

@@ -1,8 +1,9 @@
 # Job boards to poll. Adding a company is one [[sources]] entry.
 #   company: display name, used in emails and as the health key (health#<company>), so unique
-#   ats:     which adapter parses the board (supported: ashby, greenhouse)
+#   ats:     which adapter parses the board (supported: ashby, greenhouse, workday)
 #   slug:    the company's board name in that ATS
-#            (jobs.ashbyhq.com/<slug>, boards-api.greenhouse.io/v1/boards/<slug>)
+#            (jobs.ashbyhq.com/<slug>, boards-api.greenhouse.io/v1/boards/<slug>;
+#            Workday: <tenant>.<wdN>/<site> from <tenant>.<wdN>.myworkdayjobs.com/<site>)
 
 [[sources]]
 company = "Nubank"
@@ -13,3 +14,8 @@ slug    = "nubank"
 company = "Lyft"
 ats     = "greenhouse"
 slug    = "lyft"
+
+[[sources]]
+company = "Salesforce"
+ats     = "workday"
+slug    = "salesforce.wd12/External_Career_Site"

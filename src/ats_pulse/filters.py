@@ -44,9 +44,14 @@ _ENGINEERING_TITLE = re.compile(
 )
 
 
+def is_engineering_department(name: str) -> bool:
+    """Also used by the Workday adapter to pick which job categories to fetch."""
+    return bool(_ENGINEERING_DEPARTMENT.search(name))
+
+
 def is_engineering(job: Job) -> bool:
-    return bool(
-        _ENGINEERING_DEPARTMENT.search(job.department)
-        or _ENGINEERING_DEPARTMENT.search(job.team)
-        or _ENGINEERING_TITLE.search(job.title)
+    return (
+        is_engineering_department(job.department)
+        or is_engineering_department(job.team)
+        or bool(_ENGINEERING_TITLE.search(job.title))
     )

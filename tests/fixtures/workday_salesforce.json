@@ -1,0 +1,800 @@
+[
+ {
+  "request": {
+   "appliedFacets": {},
+   "limit": 1,
+   "offset": 0,
+   "searchText": ""
+  },
+  "response": {
+   "total": 1606,
+   "jobPostings": [
+    {
+     "title": "senior Instructor",
+     "externalPath": "/job/Mexico---Mexico-City/Senior-Instructor-Salesforce----Tableau_JR365621",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted Today",
+     "bulletFields": [
+      "JR365621"
+     ]
+    }
+   ],
+   "facets": [
+    {
+     "facetParameter": "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended",
+     "descriptor": "Country",
+     "values": [
+      {
+       "descriptor": "United States of America",
+       "id": "bc33aa3152ec42d4995f4791a106ed09",
+       "count": 594
+      },
+      {
+       "descriptor": "Mexico",
+       "id": "e2adff9272454660ac4fdb56fc70bb51",
+       "count": 74
+      },
+      {
+       "descriptor": "Brazil",
+       "id": "1a29bb1357b240ab99a2fa755cc87c0e",
+       "count": 55
+      },
+      {
+       "descriptor": "Canada",
+       "id": "a30a87ed25634629aa6c3958aa2b91ea",
+       "count": 48
+      }
+     ]
+    },
+    {
+     "facetParameter": "jobFamilyGroup",
+     "descriptor": "Job Category",
+     "values": [
+      {
+       "descriptor": "Sales",
+       "id": "14fa3452ec7c1011f90d030426db0000",
+       "count": 814
+      },
+      {
+       "descriptor": "Customer Success",
+       "id": "14fa3452ec7c1011f90ce62273ea0000",
+       "count": 330
+      },
+      {
+       "descriptor": "Software Engineering",
+       "id": "14fa3452ec7c1011f90d0002a2100000",
+       "count": 149
+      },
+      {
+       "descriptor": "Marketing & Communications",
+       "id": "14fa3452ec7c1011f90cecc098e70000",
+       "count": 50
+      },
+      {
+       "descriptor": "Product",
+       "id": "14fa3452ec7c1011f90cf2c552640000",
+       "count": 46
+      },
+      {
+       "descriptor": "Employee Success",
+       "id": "14fa3452ec7c1011f90cfa981ed60000",
+       "count": 38
+      },
+      {
+       "descriptor": "Finance",
+       "id": "14fa3452ec7c1011f90ceaf258770000",
+       "count": 37
+      },
+      {
+       "descriptor": "Operations",
+       "id": "14fa3452ec7c1011f90cfe3492140000",
+       "count": 28
+      },
+      {
+       "descriptor": "Fixed Term & Temporary",
+       "id": "14fa3452ec7c1011f90ce92475890000",
+       "count": 23
+      },
+      {
+       "descriptor": "Enterprise Technology & Infrastructure",
+       "id": "14fa3452ec7c1011f90cf8c9c5960000",
+       "count": 21
+      },
+      {
+       "descriptor": "Program & Project Management",
+       "id": "14fa3452ec7c1011f90cfc667aed0000",
+       "count": 19
+      },
+      {
+       "descriptor": "User Experience",
+       "id": "14fa3452ec7c1011f90d056a9bc80000",
+       "count": 16
+      },
+      {
+       "descriptor": "Real Estate & Facility Management",
+       "id": "14fa3452ec7c1011f90cf0f6f3580000",
+       "count": 12
+      },
+      {
+       "descriptor": "Global Affairs",
+       "id": "14fa3452ec7c1011f90cef28c8a30000",
+       "count": 9
+      },
+      {
+       "descriptor": "Development & Strategy",
+       "id": "14fa3452ec7c1011f90cf3f9543c0000",
+       "count": 8
+      },
+      {
+       "descriptor": "Data",
+       "id": "14fa3452ec7c1011f90cf661a7c80000",
+       "count": 4
+      },
+      {
+       "descriptor": "Corporate Functions",
+       "id": "14fa3452ec7c1011f90ce7f08fc00000",
+       "count": 1
+      },
+      {
+       "descriptor": "Compliance",
+       "id": "14fa3452ec7c1011f90ce0b8326d0000",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "facetParameter": "workerSubType",
+     "descriptor": "Job Type",
+     "values": [
+      {
+       "descriptor": "Regular",
+       "id": "3a910852b2c31010f48d2bbc8b020000",
+       "count": 1543
+      },
+      {
+       "descriptor": "Fixed Term (Fixed Term)",
+       "id": "3a910852b2c31010f48d2c561f3d0000",
+       "count": 37
+      },
+      {
+       "descriptor": "Intern (Fixed Term)",
+       "id": "3a910852b2c31010f48d2cefdccd0000",
+       "count": 22
+      },
+      {
+       "descriptor": "Contractor",
+       "id": "d603833528ba1010f55f939cce500000",
+       "count": 3
+      },
+      {
+       "descriptor": "Time-based: Payrolled",
+       "id": "d603833528ba1010f55f986a74cc0000",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "facetParameter": "timeType",
+     "descriptor": "Time Type",
+     "values": [
+      {
+       "descriptor": "Full time",
+       "id": "0e28126347c3100fe3b402cf26290000",
+       "count": 1603
+      },
+      {
+       "descriptor": "Part time",
+       "id": "0e28126347c3100fe3b4019b861f0000",
+       "count": 3
+      }
+     ]
+    },
+    {
+     "facetParameter": "locationMainGroup",
+     "values": [
+      {
+       "facetParameter": "locations",
+       "descriptor": "Locations",
+       "values": [
+        {
+         "descriptor": "Brazil - Sao Paulo",
+         "id": "1038e944b1101012453f3843c8100000",
+         "count": 43
+        },
+        {
+         "descriptor": "California - San Francisco",
+         "id": "1038e944b1101012453f6677d95a0000",
+         "count": 310
+        },
+        {
+         "descriptor": "Mexico - Mexico City",
+         "id": "343dcc4cdf1c1012453aa0aab80d0000",
+         "count": 68
+        },
+        {
+         "descriptor": "Mexico - Remote",
+         "id": "27cc52fb221f1012453ab360fd580000",
+         "count": 6
+        },
+        {
+         "descriptor": "New Mexico - Remote",
+         "id": "1038e944b1101012453c1eb806300000",
+         "count": 3
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "request": {
+   "appliedFacets": {
+    "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended": [
+     "e2adff9272454660ac4fdb56fc70bb51"
+    ],
+    "jobFamilyGroup": [
+     "14fa3452ec7c1011f90d0002a2100000"
+    ]
+   },
+   "limit": 20,
+   "offset": 0,
+   "searchText": ""
+  },
+  "response": {
+   "total": 10,
+   "jobPostings": [
+    {
+     "title": "Software Engineer SSR - Automation & Reliability",
+     "externalPath": "/job/Mexico---Mexico-City/Software-Engineer---Junior---SSR---Automation---Reliability_JR364275",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 19 Days Ago",
+     "bulletFields": [
+      "JR364275"
+     ]
+    },
+    {
+     "title": "Software Engineer Junior - Master Data Management (MDM)",
+     "externalPath": "/job/Mexico---Mexico-City/Software-Engineer-Junior---MDM_JR364122",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR364122"
+     ]
+    },
+    {
+     "title": "Data Engineer Senior | AI & Data",
+     "externalPath": "/job/Mexico---Mexico-City/Data-Engineer-Senior_JR363793",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR363793"
+     ]
+    },
+    {
+     "title": "Software Engineer Junior — Automation & Reliability",
+     "externalPath": "/job/Mexico---Mexico-City/Software-Engineer-Junior---Automation---Reliability_JR364628",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR364628"
+     ]
+    },
+    {
+     "title": "Salesforce Developer",
+     "externalPath": "/job/Mexico---Mexico-City/Salesforce-Developer_JR337290",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR337290"
+     ]
+    },
+    {
+     "title": "Senior Data Engineer",
+     "externalPath": "/job/Mexico---Mexico-City/Senior-Data-Engineer_JR336657",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR336657"
+     ]
+    },
+    {
+     "title": "Software Engineer AMTS (Junior) - Keynote Demo",
+     "externalPath": "/job/Mexico---Mexico-City/Technical-Architect---Keynote-Demos-AMTS_JR362623",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR362623"
+     ]
+    },
+    {
+     "title": "Software Engineer MTS",
+     "externalPath": "/job/Mexico---Mexico-City/Software-Engineer-MTS_JR353374",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR353374"
+     ]
+    },
+    {
+     "title": "Salesforce Developer - Affirmative Action Vacancy for Women",
+     "externalPath": "/job/Mexico---Mexico-City/Salesforce-Developer---Affirmative-Action-Vacancy-for-Women_JR252599",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR252599"
+     ]
+    },
+    {
+     "title": "Software Engineer  DET| SSR",
+     "externalPath": "/job/Mexico---Mexico-City/Software-Engineer-MTS_JR318211",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 30+ Days Ago",
+     "bulletFields": [
+      "JR318211"
+     ]
+    }
+   ],
+   "facets": [
+    {
+     "facetParameter": "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended",
+     "descriptor": "Country",
+     "values": [
+      {
+       "descriptor": "United States of America",
+       "id": "bc33aa3152ec42d4995f4791a106ed09",
+       "count": 111
+      },
+      {
+       "descriptor": "Mexico",
+       "id": "e2adff9272454660ac4fdb56fc70bb51",
+       "count": 10
+      },
+      {
+       "descriptor": "India",
+       "id": "c4f78be1a8f14da0ab49ce1162348a5e",
+       "count": 8
+      },
+      {
+       "descriptor": "Ireland",
+       "id": "04a05835925f45b3a59406a2a6b72c8a",
+       "count": 7
+      },
+      {
+       "descriptor": "United Kingdom",
+       "id": "29247e57dbaf46fb855b224e03170bc7",
+       "count": 4
+      },
+      {
+       "descriptor": "Germany",
+       "id": "dcc5b7608d8644b3a93716604e78e995",
+       "count": 4
+      },
+      {
+       "descriptor": "Netherlands",
+       "id": "9696868b09c64d52a62ee13b052383cc",
+       "count": 2
+      },
+      {
+       "descriptor": "Singapore",
+       "id": "80938777cac5440fab50d729f9634969",
+       "count": 1
+      },
+      {
+       "descriptor": "Israel",
+       "id": "084562884af243748dad7c84c304d89a",
+       "count": 1
+      },
+      {
+       "descriptor": "Belgium",
+       "id": "a04ea128f43a42e59b1e6a19e8f0b374",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "facetParameter": "jobFamilyGroup",
+     "descriptor": "Job Category",
+     "values": [
+      {
+       "descriptor": "Customer Success",
+       "id": "14fa3452ec7c1011f90ce62273ea0000",
+       "count": 27
+      },
+      {
+       "descriptor": "Sales",
+       "id": "14fa3452ec7c1011f90d030426db0000",
+       "count": 22
+      },
+      {
+       "descriptor": "Software Engineering",
+       "id": "14fa3452ec7c1011f90d0002a2100000",
+       "count": 10
+      },
+      {
+       "descriptor": "Marketing & Communications",
+       "id": "14fa3452ec7c1011f90cecc098e70000",
+       "count": 8
+      },
+      {
+       "descriptor": "Employee Success",
+       "id": "14fa3452ec7c1011f90cfa981ed60000",
+       "count": 3
+      },
+      {
+       "descriptor": "Enterprise Technology & Infrastructure",
+       "id": "14fa3452ec7c1011f90cf8c9c5960000",
+       "count": 2
+      },
+      {
+       "descriptor": "Operations",
+       "id": "14fa3452ec7c1011f90cfe3492140000",
+       "count": 1
+      },
+      {
+       "descriptor": "Finance",
+       "id": "14fa3452ec7c1011f90ceaf258770000",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "facetParameter": "workerSubType",
+     "descriptor": "Job Type",
+     "values": [
+      {
+       "descriptor": "Regular",
+       "id": "3a910852b2c31010f48d2bbc8b020000",
+       "count": 10
+      }
+     ]
+    },
+    {
+     "facetParameter": "timeType",
+     "descriptor": "Time Type",
+     "values": [
+      {
+       "descriptor": "Full time",
+       "id": "0e28126347c3100fe3b402cf26290000",
+       "count": 10
+      }
+     ]
+    },
+    {
+     "facetParameter": "locationMainGroup",
+     "values": [
+      {
+       "facetParameter": "locations",
+       "descriptor": "Locations",
+       "values": [
+        {
+         "descriptor": "Mexico - Mexico City",
+         "id": "343dcc4cdf1c1012453aa0aab80d0000",
+         "count": 10
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "request": {
+   "appliedFacets": {
+    "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended": [
+     "e2adff9272454660ac4fdb56fc70bb51"
+    ],
+    "jobFamilyGroup": [
+     "14fa3452ec7c1011f90cf8c9c5960000"
+    ]
+   },
+   "limit": 20,
+   "offset": 0,
+   "searchText": ""
+  },
+  "response": {
+   "total": 2,
+   "jobPostings": [
+    {
+     "title": "Systems Senior Analyst",
+     "externalPath": "/job/Mexico---Mexico-City/Systems-Senior-Analyst_JR363732",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 6 Days Ago",
+     "bulletFields": [
+      "JR363732"
+     ]
+    },
+    {
+     "title": "Technical Data Analyst",
+     "externalPath": "/job/Mexico---Mexico-City/System-Senior-Analyst_JR364924-1",
+     "locationsText": "Mexico - Mexico City",
+     "postedOn": "Posted 27 Days Ago",
+     "bulletFields": [
+      "JR364924"
+     ]
+    }
+   ],
+   "facets": [
+    {
+     "facetParameter": "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended",
+     "descriptor": "Country",
+     "values": [
+      {
+       "descriptor": "United States of America",
+       "id": "bc33aa3152ec42d4995f4791a106ed09",
+       "count": 17
+      },
+      {
+       "descriptor": "Mexico",
+       "id": "e2adff9272454660ac4fdb56fc70bb51",
+       "count": 2
+      },
+      {
+       "descriptor": "Ireland",
+       "id": "04a05835925f45b3a59406a2a6b72c8a",
+       "count": 1
+      },
+      {
+       "descriptor": "Australia",
+       "id": "d903bb3fedad45039383f6de334ad4db",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "facetParameter": "jobFamilyGroup",
+     "descriptor": "Job Category",
+     "values": [
+      {
+       "descriptor": "Customer Success",
+       "id": "14fa3452ec7c1011f90ce62273ea0000",
+       "count": 27
+      },
+      {
+       "descriptor": "Sales",
+       "id": "14fa3452ec7c1011f90d030426db0000",
+       "count": 22
+      },
+      {
+       "descriptor": "Software Engineering",
+       "id": "14fa3452ec7c1011f90d0002a2100000",
+       "count": 10
+      },
+      {
+       "descriptor": "Marketing & Communications",
+       "id": "14fa3452ec7c1011f90cecc098e70000",
+       "count": 8
+      },
+      {
+       "descriptor": "Employee Success",
+       "id": "14fa3452ec7c1011f90cfa981ed60000",
+       "count": 3
+      },
+      {
+       "descriptor": "Enterprise Technology & Infrastructure",
+       "id": "14fa3452ec7c1011f90cf8c9c5960000",
+       "count": 2
+      },
+      {
+       "descriptor": "Operations",
+       "id": "14fa3452ec7c1011f90cfe3492140000",
+       "count": 1
+      },
+      {
+       "descriptor": "Finance",
+       "id": "14fa3452ec7c1011f90ceaf258770000",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "facetParameter": "workerSubType",
+     "descriptor": "Job Type",
+     "values": [
+      {
+       "descriptor": "Regular",
+       "id": "3a910852b2c31010f48d2bbc8b020000",
+       "count": 2
+      }
+     ]
+    },
+    {
+     "facetParameter": "timeType",
+     "descriptor": "Time Type",
+     "values": [
+      {
+       "descriptor": "Full time",
+       "id": "0e28126347c3100fe3b402cf26290000",
+       "count": 2
+      }
+     ]
+    },
+    {
+     "facetParameter": "locationMainGroup",
+     "values": [
+      {
+       "facetParameter": "locations",
+       "descriptor": "Locations",
+       "values": [
+        {
+         "descriptor": "Mexico - Mexico City",
+         "id": "343dcc4cdf1c1012453aa0aab80d0000",
+         "count": 2
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "request": {
+   "appliedFacets": {
+    "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended": [
+     "e2adff9272454660ac4fdb56fc70bb51"
+    ],
+    "jobFamilyGroup": [
+     "14fa3452ec7c1011f90cf661a7c80000"
+    ]
+   },
+   "limit": 20,
+   "offset": 0,
+   "searchText": ""
+  },
+  "response": {
+   "total": 0,
+   "jobPostings": [],
+   "facets": [
+    {
+     "facetParameter": "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended",
+     "descriptor": "Country",
+     "values": [
+      {
+       "descriptor": "United States of America",
+       "id": "bc33aa3152ec42d4995f4791a106ed09",
+       "count": 4
+      },
+      {
+       "descriptor": "Mexico",
+       "id": "e2adff9272454660ac4fdb56fc70bb51"
+      }
+     ]
+    },
+    {
+     "facetParameter": "jobFamilyGroup",
+     "descriptor": "Job Category",
+     "values": [
+      {
+       "descriptor": "Customer Success",
+       "id": "14fa3452ec7c1011f90ce62273ea0000",
+       "count": 27
+      },
+      {
+       "descriptor": "Sales",
+       "id": "14fa3452ec7c1011f90d030426db0000",
+       "count": 22
+      },
+      {
+       "descriptor": "Software Engineering",
+       "id": "14fa3452ec7c1011f90d0002a2100000",
+       "count": 10
+      },
+      {
+       "descriptor": "Marketing & Communications",
+       "id": "14fa3452ec7c1011f90cecc098e70000",
+       "count": 8
+      },
+      {
+       "descriptor": "Employee Success",
+       "id": "14fa3452ec7c1011f90cfa981ed60000",
+       "count": 3
+      },
+      {
+       "descriptor": "Enterprise Technology & Infrastructure",
+       "id": "14fa3452ec7c1011f90cf8c9c5960000",
+       "count": 2
+      },
+      {
+       "descriptor": "Operations",
+       "id": "14fa3452ec7c1011f90cfe3492140000",
+       "count": 1
+      },
+      {
+       "descriptor": "Finance",
+       "id": "14fa3452ec7c1011f90ceaf258770000",
+       "count": 1
+      },
+      {
+       "descriptor": "Data",
+       "id": "14fa3452ec7c1011f90cf661a7c80000"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "request": {
+   "appliedFacets": {
+    "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended": [
+     "e2adff9272454660ac4fdb56fc70bb51"
+    ],
+    "workerSubType": [
+     "3a910852b2c31010f48d2cefdccd0000"
+    ]
+   },
+   "limit": 20,
+   "offset": 0,
+   "searchText": ""
+  },
+  "response": {
+   "total": 0,
+   "jobPostings": [],
+   "facets": [
+    {
+     "facetParameter": "CF_-_REC_-_LRV_-_Job_Posting_Anchor_-_Country_from_Job_Posting_Location_Extended",
+     "descriptor": "Country",
+     "values": [
+      {
+       "descriptor": "United States of America",
+       "id": "bc33aa3152ec42d4995f4791a106ed09",
+       "count": 12
+      },
+      {
+       "descriptor": "France",
+       "id": "54c5b6971ffb4bf0b116fe7651ec789a",
+       "count": 4
+      },
+      {
+       "descriptor": "Singapore",
+       "id": "80938777cac5440fab50d729f9634969",
+       "count": 2
+      },
+      {
+       "descriptor": "United Arab Emirates",
+       "id": "7b4fa1f369bd4604ba3692682fcbe345",
+       "count": 1
+      },
+      {
+       "descriptor": "Denmark",
+       "id": "49ab063f422741e2aef271de00efeac8",
+       "count": 1
+      },
+      {
+       "descriptor": "Colombia",
+       "id": "e8106cd6a3534f2dba6fdee2d41db89d",
+       "count": 1
+      },
+      {
+       "descriptor": "Brazil",
+       "id": "1a29bb1357b240ab99a2fa755cc87c0e",
+       "count": 1
+      },
+      {
+       "descriptor": "Mexico",
+       "id": "e2adff9272454660ac4fdb56fc70bb51"
+      }
+     ]
+    },
+    {
+     "facetParameter": "workerSubType",
+     "descriptor": "Job Type",
+     "values": [
+      {
+       "descriptor": "Regular",
+       "id": "3a910852b2c31010f48d2bbc8b020000",
+       "count": 74
+      },
+      {
+       "descriptor": "Intern (Fixed Term)",
+       "id": "3a910852b2c31010f48d2cefdccd0000"
+      }
+     ]
+    }
+   ]
+  }
+ }
+]

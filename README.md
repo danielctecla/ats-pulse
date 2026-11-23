@@ -45,7 +45,7 @@ src/ats_pulse/              Lambda code (stdlib + boto3, zipped as is)
   emails.py                 digest (HTML + plain text) and alert content
   notify.py                 sends them through SES
   handler.py                Lambda entry point
-tests/                      pytest + moto; fixtures/ holds real Ashby and Greenhouse responses, trimmed
+tests/                      pytest + moto; fixtures/ holds real Ashby, Greenhouse and Workday responses, trimmed
 scripts/run_local.py        backs make run-local
 iac/env/                    Terraform: Lambda, DynamoDB, Scheduler, SES, alarm
 iac/env/tests/              terraform test (mocked providers, no AWS calls)
@@ -81,6 +81,8 @@ Behavior to know about:
 - When Mexico is only a secondary location, the job's location reads `Ciudad de México (also Palo Alto)`.
 - The stored link is the job's posting page, which has the apply button.
 - Greenhouse boards have no standard department in their job list, so the department is the board's `Career Site Category` field. Boards that don't use it are matched on the title only.
+- Workday boards are filtered by the API itself, using the board's facets: only openings in Mexico are fetched, from the job categories that pass the department rule above, plus internships from any category (those then go through the title rule). Openings in other categories aren't matched on the title: on real data, "Solution Architect" and "Solution Engineer" there were sales roles. A board without categories gets all its Mexico openings, matched on the title only.
+- Workday only says how long ago a job was posted (`Posted 3 Days Ago`), so the date is calculated from that, and left empty for `Posted 30+ Days Ago`.
 
 ### Emails
 
@@ -100,11 +102,11 @@ Add one entry to `sources.toml`:
 ```toml
 [[sources]]
 company = "Acme"         # display name, also the health key (must be unique)
-ats     = "greenhouse"   # supported: ashby, greenhouse
+ats     = "greenhouse"   # supported: ashby, greenhouse, workday
 slug    = "acme"         # the company's board name in that ATS
 ```
 
-The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`.
+The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`. For Workday it's `<tenant>.<wdN>/<site>`, taken from the careers site URL `https://<tenant>.<wdN>.myworkdayjobs.com/<site>` (e.g. `acme.wd5/External_Careers`).
 
 To support another ATS (e.g. Lever), add a module in `adapters/` with a `fetch_jobs(source)` function and register it in `adapters/__init__.py`.
 
@@ -134,7 +136,7 @@ Each run logs one JSON line per source, plus a run summary:
 {"message": "source summary", "source": "greenhouse:acme", "company": "Acme", "fetched": 148, "mexico": 5, "engineering": 4, "new": 4, "errors": 0}
 ```
 
-`errors` counts malformed postings skipped, plus 1 if the source failed; failed sources also carry an `error` field.
+`errors` counts malformed postings skipped, plus 1 if the source failed; failed sources also carry an `error` field. For Workday sources, `fetched` only counts what the API returned after its own filtering (Mexico, engineering categories, internships).
 
 ## Configuration
 

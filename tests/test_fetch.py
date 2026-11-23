@@ -17,8 +17,10 @@ class FakeResponse(io.BytesIO):
         return False
 
 
-def fake_urlopen(result):
+def fake_urlopen(result, requests=None):
     def urlopen(request, timeout):
+        if requests is not None:
+            requests.append(request)
         if isinstance(result, BaseException):
             raise result
         return FakeResponse(result)
@@ -31,6 +33,17 @@ def test_returns_parsed_json(monkeypatch):
     assert fetch.get_json(URL) == {"jobs": []}
 
 
+def test_post_sends_the_payload_as_json(monkeypatch):
+    requests = []
+    monkeypatch.setattr(fetch.urllib.request, "urlopen", fake_urlopen(b'{"total": 0}', requests))
+
+    assert fetch.post_json(URL, {"limit": 20}) == {"total": 0}
+    [request] = requests
+    assert request.get_method() == "POST"
+    assert request.data == b'{"limit": 20}'
+    assert request.get_header("Content-type") == "application/json"
+
+
 @pytest.mark.parametrize(
     "result, message",
     [
@@ -41,7 +54,8 @@ def test_returns_parsed_json(monkeypatch):
     ],
     ids=["http-error", "timeout", "dns", "invalid-json"],
 )
-def test_failures_become_source_errors(monkeypatch, result, message):
+@pytest.mark.parametrize("call", [lambda: fetch.get_json(URL), lambda: fetch.post_json(URL, {})], ids=["get", "post"])
+def test_failures_become_source_errors(monkeypatch, result, message, call):
     monkeypatch.setattr(fetch.urllib.request, "urlopen", fake_urlopen(result))
     with pytest.raises(SourceError, match=message):
-        fetch.get_json(URL)
+        call()

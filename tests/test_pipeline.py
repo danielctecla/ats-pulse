@@ -4,11 +4,11 @@ import logging
 import pytest
 
 from ats_pulse import handler, pipeline
-from ats_pulse.adapters import ADAPTERS, ashby, greenhouse
+from ats_pulse.adapters import ADAPTERS, ashby, greenhouse, workday
 from ats_pulse.config import Source
 from ats_pulse.fetch import SourceError
 
-from conftest import EMAIL, TABLE_NAME, make_job, sent_emails
+from conftest import EMAIL, TABLE_NAME, WORKDAY_RECORDED_ON, make_job, replay, sent_emails
 
 BROKEN = Source(company="Broken", ats="broken", slug="broken")
 SLOW = Source(company="Slow", ats="slow", slug="slow")
@@ -112,18 +112,25 @@ def test_long_errors_are_cut_in_the_alert(store, notifier):
     assert len(notifier.alerts[0][0].last_error) == 500  # same as what DynamoDB keeps
 
 
-def test_handler_runs_configured_sources(table, ses, monkeypatch, ashby_payload, greenhouse_payload):
+def test_handler_runs_configured_sources(
+    table, ses, monkeypatch, ashby_payload, greenhouse_payload, workday_recording
+):
     """End to end through lambda_handler: API calls replaced by the fixtures, SES by moto."""
     monkeypatch.setenv("TABLE_NAME", TABLE_NAME)
     monkeypatch.setenv("NOTIFICATION_EMAIL", EMAIL)
     monkeypatch.setitem(ADAPTERS, "ashby", lambda source: ashby.parse(ashby_payload, source))
     monkeypatch.setitem(ADAPTERS, "greenhouse", lambda source: greenhouse.parse(greenhouse_payload, source))
+    monkeypatch.setitem(
+        ADAPTERS,
+        "workday",
+        lambda source: workday.fetch_jobs(source, post=replay(workday_recording), today=WORKDAY_RECORDED_ON),
+    )
 
     first = handler.lambda_handler({}, None)
     second = handler.lambda_handler({}, None)
 
-    assert first == {"sources": 2, "failed_sources": 0, "new": 11, "alerts": 0}  # 7 + 4
+    assert first == {"sources": 3, "failed_sources": 0, "new": 23, "alerts": 0}  # 7 + 4 + 12
     assert second["new"] == 0
     assert json.dumps(first)  # JSON-serializable for the Lambda response
 
-    assert [m.subject for m in sent_emails()] == ["11 new engineering jobs in Mexico: Lyft, Nubank"]
+    assert [m.subject for m in sent_emails()] == ["23 new engineering jobs in Mexico: Lyft, Nubank, Salesforce"]
