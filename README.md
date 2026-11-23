@@ -90,7 +90,7 @@ Both are sent from and to the notification address, with the sender name `ats-pu
 
 | Email | Subject | Format |
 |-------|---------|--------|
-| Digest | `7 new engineering jobs in Mexico: Acme, Globex` | HTML plus a plain-text part. Grouped by company (A–Z), newest posting first: title (linked), location, department, posting date. |
+| Digest | `7 new engineering jobs in Mexico: Acme, Globex` | HTML plus a plain-text part with the same content. Jobs grouped by company (A–Z), newest posting first, each with its title (linked to the posting), location, department, workplace and employment type when the board gives them, and posting date with its age (`Nov 19 · 3 days ago`). |
 | Alert | `Job board failing: Acme` | Plain text: each failing source, failed runs in a row, last error. |
 
 `make run-local` prints both as plain text and writes the digest's HTML to `preview.html` (gitignored) so you can open it in a browser.
