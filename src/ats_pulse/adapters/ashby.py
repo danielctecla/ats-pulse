@@ -7,6 +7,8 @@ from ..fetch import SourceError, get_json
 from ..models import Job
 
 API_URL = "https://api.ashbyhq.com/posting-api/job-board/{slug}"
+# Ashby enum values to the labels shown in the digest; others are shown as is
+_LABELS = {"FullTime": "Full-time", "PartTime": "Part-time", "Intern": "Internship", "OnSite": "On-site"}
 
 
 def fetch_jobs(source: Source, get=get_json) -> tuple[list[Job], int]:
@@ -50,7 +52,14 @@ def _normalize(raw: dict, source: Source) -> Job:
         published_at=str(raw.get("publishedAt") or ""),
         secondary_locations=tuple(s["location"].strip() for s in secondary if s.get("location")),
         countries=tuple(c for c in countries if c),
+        workplace_type=_label(raw.get("workplaceType")),
+        employment_type=_label(raw.get("employmentType")),
     )
+
+
+def _label(value) -> str:
+    value = str(value or "").strip()
+    return _LABELS.get(value, value)
 
 
 def _country(address) -> str | None:

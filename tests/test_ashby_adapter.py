@@ -24,7 +24,23 @@ def test_normalizes_real_response(ashby_payload, nubank):
     assert job.url == raw["jobUrl"]
     assert job.published_at == raw["publishedAt"]
     assert job.countries == ("Mexico",)
+    assert (job.workplace_type, job.employment_type) == ("Hybrid", "Full-time")
     assert job.pk == f"job#ashby:nubank#{raw['id']}"
+
+
+@pytest.mark.parametrize(
+    "workplace, employment, expected",
+    [
+        ("OnSite", "Intern", ("On-site", "Internship")),
+        ("Remote", "PartTime", ("Remote", "Part-time")),
+        (None, "Contract", ("", "Contract")),  # unknown values are shown as is
+    ],
+)
+def test_workplace_and_employment_labels(nubank, workplace, employment, expected):
+    payload = {"jobs": [{"id": "1", "title": "Engineer", "workplaceType": workplace, "employmentType": employment}]}
+    [job], _ = ashby.parse(payload, nubank)
+
+    assert (job.workplace_type, job.employment_type) == expected
 
 
 def test_keeps_secondary_locations_and_their_countries(ashby_payload, nubank):

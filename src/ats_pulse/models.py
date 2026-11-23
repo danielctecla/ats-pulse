@@ -13,10 +13,12 @@ class Job:
     department: str
     url: str
     published_at: str  # ISO 8601, as given by the ATS
-    # Used by the filters only, not stored
+    # Not stored: used by the filters and the digest only
     team: str = ""
     secondary_locations: tuple[str, ...] = field(default=())
     countries: tuple[str, ...] = field(default=())
+    workplace_type: str = ""  # "Hybrid", "Remote", "On-site"; empty when the ATS doesn't say
+    employment_type: str = ""  # "Full-time", "Internship", ...
 
     @property
     def pk(self) -> str:
