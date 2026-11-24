@@ -1,11 +1,11 @@
 # ats-pulse
 
-Serverless job tracker. Every 3 hours a Lambda polls company job boards, keeps the Mexico-based engineering openings it hasn't seen before, stores them in DynamoDB, and emails a digest through SES.
+Serverless job tracker. Every 4 hours from 6:00 to 22:00 (Mexico City time), a Lambda polls company job boards, keeps the Mexico-based engineering openings it hasn't seen before, stores them in DynamoDB, and emails a digest through SES.
 
 ```
 EventBridge Scheduler ──► Lambda (Python, stdlib + boto3) ──► DynamoDB (seen jobs, source health)
-  every 3 h, Mexico City        │
-                                ├──► SES: job digest, alert when a source keeps failing
+  every 4 h, 6:00 to 22:00      │
+  Mexico City time              ├──► SES: job digest, alert when a source keeps failing
                                 └──► CloudWatch alarm ──► SNS: email when the Lambda itself fails
 ```
 
@@ -158,7 +158,7 @@ Terraform inputs ([iac/env/variables.tf](iac/env/variables.tf)). `*.tfvars` file
 | `notification_email` | none (required, sensitive) |
 | `aws_region` | `us-east-1` |
 | `project_name` | `ats-pulse` (prefix for every resource name) |
-| `schedule_expression` | `cron(0 0/3 * * ? *)`: every 3 hours on the hour |
+| `schedule_expression` | `cron(0 6,10,14,18,22 * * ? *)`: every 4 hours from 6:00 to 22:00, none overnight |
 | `schedule_timezone` | `America/Mexico_City` |
 | `lambda_runtime` | `python3.15` |
 | `lambda_memory_mb` | `256` |
