@@ -45,7 +45,7 @@ src/ats_pulse/              Lambda code (stdlib + boto3, zipped as is)
   emails.py                 digest (HTML + plain text) and alert content
   notify.py                 sends them through SES
   handler.py                Lambda entry point
-tests/                      pytest + moto; fixtures/ holds real Ashby, Greenhouse and Workday responses, trimmed
+tests/                      pytest + moto; fixtures/ holds real Ashby, Greenhouse, Workday and Oracle responses, trimmed
 scripts/run_local.py        backs make run-local
 iac/env/                    Terraform: Lambda, DynamoDB, Scheduler, SES, alarm
 iac/env/tests/              terraform test (mocked providers, no AWS calls)
@@ -83,6 +83,7 @@ Behavior to know about:
 - Greenhouse boards have no standard department in their job list, so the department is the board's `Career Site Category` field. Boards that don't use it are matched on the title only.
 - Workday boards are filtered by the API itself, using the board's facets: only openings in Mexico are fetched, from the job categories that pass the department rule above, plus internships from any category (those then go through the title rule). Openings in other categories aren't matched on the title: on real data, "Solution Architect" and "Solution Engineer" there were sales roles. A board without categories gets all its Mexico openings, matched on the title only.
 - Workday only says how long ago a job was posted (`Posted 3 Days Ago`), so the date is calculated from that, and left empty for `Posted 30+ Days Ago`.
+- Oracle Recruiting Cloud boards are filtered by the API too: only openings in Mexico are fetched, including those where Mexico is only a secondary location. The department is the job family when the board fills it in; boards that don't are matched on the title only.
 
 ### Emails
 
@@ -102,12 +103,12 @@ Add one entry to `sources.toml`:
 ```toml
 [[sources]]
 company = "Acme"         # display name, also the health key (must be unique)
-ats     = "greenhouse"   # supported: ashby, greenhouse, workday
+ats     = "greenhouse"   # supported: ashby, greenhouse, oracle, workday
 slug    = "acme"         # the company's board name in that ATS
 logo    = "https://upload.wikimedia.org/.../330px-Acme_logo.svg.png"  # optional
 ```
 
-The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`. For Workday it's `<tenant>.<wdN>/<site>`, taken from the careers site URL `https://<tenant>.<wdN>.myworkdayjobs.com/<site>` (e.g. `acme.wd5/External_Careers`).
+The slug is the `<slug>` in `jobs.ashbyhq.com/<slug>` or `boards-api.greenhouse.io/v1/boards/<slug>/jobs`. For Workday it's `<tenant>.<wdN>/<site>`, taken from the careers site URL `https://<tenant>.<wdN>.myworkdayjobs.com/<site>` (e.g. `acme.wd5/External_Careers`). For Oracle Recruiting Cloud it's `<pod>/<site>`, from `https://<pod>.oraclecloud.com/hcmUI/CandidateExperience/en/sites/<site>` (e.g. `acme.fa.us2/CX_1`).
 
 `logo` is optional: an https URL of a PNG or JPEG, shown in the digest instead of the company name (the name still shows if the mail client blocks images). Gmail doesn't render SVG or embedded `data:` images, so use a hosted PNG. Wikimedia Commons serves PNG renders of most logos (`upload.wikimedia.org/wikipedia/commons/thumb/.../330px-<file>.svg.png`).
 
@@ -139,7 +140,7 @@ Each run logs one JSON line per source, plus a run summary:
 {"message": "source summary", "source": "greenhouse:acme", "company": "Acme", "fetched": 148, "mexico": 5, "engineering": 4, "new": 4, "errors": 0}
 ```
 
-`errors` counts malformed postings skipped, plus 1 if the source failed; failed sources also carry an `error` field. For Workday sources, `fetched` only counts what the API returned after its own filtering (Mexico, engineering categories, internships).
+`errors` counts malformed postings skipped, plus 1 if the source failed; failed sources also carry an `error` field. For Workday and Oracle sources, `fetched` only counts what the API returned after its own filtering (Workday: Mexico, engineering categories, internships; Oracle: Mexico).
 
 ## Configuration
 
