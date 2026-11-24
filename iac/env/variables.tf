@@ -53,7 +53,7 @@ variable "project_name" {
 variable "schedule_expression" {
   description = "EventBridge Scheduler expression. Use cron() so schedule_timezone applies (rate() ignores it)."
   type        = string
-  default     = "cron(0 0/3 * * ? *)"
+  default     = "cron(0 6,10,14,18,22 * * ? *)"
 }
 
 variable "schedule_timezone" {

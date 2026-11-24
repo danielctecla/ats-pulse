@@ -1,9 +1,9 @@
 import pytest
 
-from ats_pulse.adapters import ashby, greenhouse, workday
+from ats_pulse.adapters import ashby, greenhouse, oracle, workday
 from ats_pulse.filters import is_engineering, is_mexico, mexico_location
 
-from conftest import WORKDAY_RECORDED_ON, make_job, replay
+from conftest import WORKDAY_RECORDED_ON, make_job, replay, replay_get
 
 
 # --- Mexico -------------------------------------------------------------------
@@ -111,3 +111,29 @@ def test_real_workday_response_selects_every_job(salesforce, workday_recording):
 
     assert all(is_mexico(j) and is_engineering(j) for j in jobs)
     assert len(jobs) == 12
+
+
+def test_real_oracle_responses_select_expected_jobs(jpmorgan, jpmorgan_recording, oracle_corp, oracle_recording):
+    """The Oracle adapter only fetches Mexico openings, so all pass the Mexico rule. JPMorgan's
+    engineering one is matched by its job family; Oracle has no job families, so its jobs are
+    matched on the title only (Spanish titles such as "Arquitecto/a" aren't)."""
+    jpm, _ = oracle.fetch_jobs(jpmorgan, get=replay_get(jpmorgan_recording))
+    orcl, _ = oracle.fetch_jobs(oracle_corp, get=replay_get(oracle_recording))
+
+    assert all(is_mexico(j) for j in jpm + orcl)
+    assert {j.title for j in jpm if is_engineering(j)} == {"Technology Risk & Controls Director (CISO - Cyber)"}
+    assert {j.title for j in orcl if is_engineering(j)} == {
+        "OIC Integration Developer",
+        "GTM Specialist – Junior Developer Relations",
+        "Senior Solutions Architect | Oracle Analytics & FDI",
+        "Senior Site Reliability Engineer",  # 4 openings
+        "Principal Application Software Engineer",  # Mexico is a secondary location
+        "Cloud Architect – Retail & Multi-Industry",
+        "Cloud Architect – Financial Services Industry (FSI)",
+        "Principal Network Developer",
+        "Senior Product Engineer – GPU Server Platforms (Ciudad Juarez, México)",
+        "SRE-Cloud Engineer II",
+        "SRE-Cloud Engineer II - Java",
+        "Senior Data Systems Operations Developer",
+    }
+    assert sum(is_engineering(j) for j in orcl) == 15

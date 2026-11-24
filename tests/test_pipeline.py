@@ -4,11 +4,11 @@ import logging
 import pytest
 
 from ats_pulse import handler, pipeline
-from ats_pulse.adapters import ADAPTERS, ashby, greenhouse, workday
+from ats_pulse.adapters import ADAPTERS, ashby, greenhouse, oracle, workday
 from ats_pulse.config import Source
 from ats_pulse.fetch import SourceError
 
-from conftest import EMAIL, TABLE_NAME, WORKDAY_RECORDED_ON, make_job, replay, sent_emails
+from conftest import EMAIL, TABLE_NAME, WORKDAY_RECORDED_ON, make_job, replay, replay_get, sent_emails
 
 BROKEN = Source(company="Broken", ats="broken", slug="broken")
 SLOW = Source(company="Slow", ats="slow", slug="slow")
@@ -113,7 +113,7 @@ def test_long_errors_are_cut_in_the_alert(store, notifier):
 
 
 def test_handler_runs_configured_sources(
-    table, ses, monkeypatch, ashby_payload, greenhouse_payload, workday_recording
+    table, ses, monkeypatch, ashby_payload, greenhouse_payload, workday_recording, jpmorgan_recording, oracle_recording
 ):
     """End to end through lambda_handler: API calls replaced by the fixtures, SES by moto."""
     monkeypatch.setenv("TABLE_NAME", TABLE_NAME)
@@ -125,12 +125,14 @@ def test_handler_runs_configured_sources(
         "workday",
         lambda source: workday.fetch_jobs(source, post=replay(workday_recording), today=WORKDAY_RECORDED_ON),
     )
+    oracle_get = replay_get(jpmorgan_recording + oracle_recording)
+    monkeypatch.setitem(ADAPTERS, "oracle", lambda source: oracle.fetch_jobs(source, get=oracle_get))
 
     first = handler.lambda_handler({}, None)
     second = handler.lambda_handler({}, None)
 
-    assert first == {"sources": 3, "failed_sources": 0, "new": 23, "alerts": 0}  # 7 + 4 + 12
+    assert first == {"sources": 5, "failed_sources": 0, "new": 39, "alerts": 0}  # 7 + 4 + 12 + 1 + 15
     assert second["new"] == 0
     assert json.dumps(first)  # JSON-serializable for the Lambda response
 
-    assert [m.subject for m in sent_emails()] == ["Openings at Lyft, Nubank and Salesforce"]
+    assert [m.subject for m in sent_emails()] == ["Openings at JPMorgan, Lyft, Nubank and 2 more"]

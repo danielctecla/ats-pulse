@@ -99,6 +99,30 @@ def workday_recording():
     return json.loads((FIXTURES / "workday_salesforce.json").read_text(encoding="utf-8"))
 
 
+@pytest.fixture
+def jpmorgan():
+    return Source(company="JPMorgan", ats="oracle", slug="jpmc.fa/CX_1001")
+
+
+@pytest.fixture
+def oracle_corp():
+    return Source(company="Oracle", ats="oracle", slug="eeho.fa.us2/jobsearch")
+
+
+@pytest.fixture
+def jpmorgan_recording():
+    """Real JPMorgan requests and responses (2026-11-23): its 17 Mexico openings, one page.
+    Facet lists and descriptions removed."""
+    return json.loads((FIXTURES / "oracle_jpmorgan.json").read_text(encoding="utf-8"))
+
+
+@pytest.fixture
+def oracle_recording():
+    """Real Oracle requests and responses (2026-11-23): its 28 Mexico openings, two pages.
+    Facet lists and descriptions removed."""
+    return json.loads((FIXTURES / "oracle_oracle.json").read_text(encoding="utf-8"))
+
+
 def replay(recording):
     """A post() that answers the recorded requests and fails on any other."""
 
@@ -109,6 +133,18 @@ def replay(recording):
         raise AssertionError(f"unexpected request: {payload}")
 
     return post
+
+
+def replay_get(recording):
+    """A get() that answers the recorded URLs and fails on any other."""
+
+    def get(url):
+        for exchange in recording:
+            if exchange["request"] == url:
+                return copy.deepcopy(exchange["response"])
+        raise AssertionError(f"unexpected request: {url}")
+
+    return get
 
 
 def make_job(**overrides) -> Job:

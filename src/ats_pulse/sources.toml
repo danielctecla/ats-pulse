@@ -1,9 +1,10 @@
 # Job boards to poll. Adding a company is one [[sources]] entry.
 #   company: display name, used in emails and as the health key (health#<company>), so unique
-#   ats:     which adapter parses the board (supported: ashby, greenhouse, workday)
+#   ats:     which adapter parses the board (supported: ashby, greenhouse, oracle, workday)
 #   slug:    the company's board name in that ATS
 #            (jobs.ashbyhq.com/<slug>, boards-api.greenhouse.io/v1/boards/<slug>;
-#            Workday: <tenant>.<wdN>/<site> from <tenant>.<wdN>.myworkdayjobs.com/<site>)
+#            Workday: <tenant>.<wdN>/<site> from <tenant>.<wdN>.myworkdayjobs.com/<site>;
+#            Oracle: <pod>/<site> from <pod>.oraclecloud.com/hcmUI/CandidateExperience/en/sites/<site>)
 #   logo:    optional https URL of a PNG/JPEG, shown in the digest instead of the name.
 #            Gmail doesn't show SVG or embedded images, so use a hosted PNG
 #            (e.g. Wikimedia Commons renders logos as PNG thumbnails).
@@ -25,3 +26,15 @@ company = "Salesforce"
 ats     = "workday"
 slug    = "salesforce.wd12/External_Career_Site"
 logo    = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/330px-Salesforce.com_logo.svg.png"
+
+[[sources]]
+company = "JPMorgan"
+ats     = "oracle"
+slug    = "jpmc.fa/CX_1001"
+logo    = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/JPMorgan_logo.svg/330px-JPMorgan_logo.svg.png"
+
+[[sources]]
+company = "Oracle"
+ats     = "oracle"
+slug    = "eeho.fa.us2/jobsearch"
+logo    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/330px-Oracle_logo.svg.png"
